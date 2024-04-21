@@ -75,6 +75,7 @@ public class AuthControllerIT {
     @Test
     @DisplayName("Should login")
     void giveLoginRequest_thenAuthenticate_shouldLogin() throws Exception {
+
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("test@test.com");
         loginRequest.setPassword("test");
@@ -95,6 +96,7 @@ public class AuthControllerIT {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.token").exists());
+
         verify(userRepository).findByEmail(userDetails.getUsername());
     }
 
@@ -102,31 +104,35 @@ public class AuthControllerIT {
     @DisplayName("Should register but email already exists")
     void giveSignupRequest_thenRegister_shouldReturnBadRequest() throws Exception{
 
-        MessageResponse messageResponse = new MessageResponse("Error: Email already exists!");
+        MessageResponse messageResponse = new MessageResponse("Error: Email is already taken!");
+
         when(userRepository.existsByEmail(signupRequest.getEmail())).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("api/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(signupRequest)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(messageResponse.getMessage()));
+
         verify(userRepository).existsByEmail(signupRequest.getEmail());
     }
 
     @Test
     @DisplayName("Should register")
     void giveSignupRequest_thenRegister_shouldRegister() throws Exception{
-        MessageResponse messageResponse = new MessageResponse("User successfully registered !");
+
+        MessageResponse messageResponse = new MessageResponse("User registered successfully!");
 
         when(userRepository.existsByEmail(signupRequest.getEmail())).thenReturn(false);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("api/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(signupRequest)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(messageResponse.getMessage()));
+
         verify(userRepository).existsByEmail(signupRequest.getEmail());
         verify(userRepository).save(new User());
     }
