@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="yoga-app" target="1.8" />
+      <module name="yoga-app" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
