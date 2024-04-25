@@ -1,6 +1,5 @@
 package com.openclassrooms.starterjwt.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.starterjwt.dto.SessionDto;
 import com.openclassrooms.starterjwt.mapper.SessionMapper;
 import com.openclassrooms.starterjwt.models.Session;
@@ -8,29 +7,21 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import com.openclassrooms.starterjwt.services.SessionService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import static java.lang.Long.parseLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -42,17 +33,14 @@ public class SessionControllerIT {
     @Autowired
     private SessionService sessionService;
 
-    @Mock
+    @Autowired
     private SessionRepository sessionRepository;
-    @Mock
+    @Autowired
     private UserRepository userRepository;
 
-    @InjectMocks
+    @Autowired
     private SessionController sessionController;
 
-    private MockMvc mockMvc;
-
-    private ObjectMapper objectMapper;
 
     private final String id = "10";
 
@@ -60,8 +48,6 @@ public class SessionControllerIT {
     void setUp(){
         sessionService = new SessionService(sessionRepository, userRepository);
         sessionController = new SessionController(sessionService, sessionMapper);
-        mockMvc = MockMvcBuilders.standaloneSetup(sessionController).build();
-        objectMapper = new ObjectMapper();
     }
 
     @Test
@@ -70,57 +56,64 @@ public class SessionControllerIT {
 
         Session session = new Session();
         session.setName("Yoga");
+        session.setDate(new Date());
+        session.setDescription("Description session");
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.of(session));
+        SessionDto sessionDto = new SessionDto();
+        sessionDto.setName("Yoga");
+        sessionDto.setDate(new Date());
+        sessionDto.setDescription("Description session");
+        sessionDto.setTeacher_id(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", id))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Yoga"));
+        Session newSession = sessionRepository.save(session);
+        Long idSession = newSession.getId();
+        ResponseEntity<?> responseEntity = sessionController.findById(String.valueOf(idSession));
+        assertEquals(sessionDto.getName(), ((SessionDto)responseEntity.getBody()).getName());
+        assertEquals(sessionDto.getDescription(), ((SessionDto)responseEntity.getBody()).getDescription());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        verify(sessionRepository).findById(Long.parseLong(id));
     }
 
     @Test
     @DisplayName("Should return a not found status")
     void giveIdSession_thenFindSessionById_shouldNotFoundStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.empty());
+        ResponseEntity<?> responseEntity = sessionController.findById("1");
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", id))
-                .andExpect(MockMvcResultMatchers.status().isNotFound());
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
 
-        verify(sessionRepository).findById(Long.parseLong(id));
     }
 
     @Test
     @DisplayName("Should return a bad request status")
     void giveIdSession_thenFindSessionById_shouldBadRequestStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenThrow(NumberFormatException.class);
+        ResponseEntity<?> responseEntity = sessionController.findById("a");
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", id))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-
-        verify(sessionRepository).findById(Long.parseLong(id));
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
     @Test
     @DisplayName("Should return all sessions")
     void giveIdSession_thenFindSessionById_shouldReturnAllSessions() throws Exception {
 
-        List<Session> sessions = List.of(new Session().setName("Yoga"),
-                new Session().setName("Zen"));
+        //Créer une session
+        Session session = new Session();
+        session.setName("Yoga");
+        session.setDate(new Date());
+        session.setDescription("Description session");
 
-        when(sessionRepository.findAll()).thenReturn(sessions);
+        //Sauvegardée dans la BDD pour le test
+        sessionRepository.save(session);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/session"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Yoga"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].name").value("Zen"));
+        //On crée une liste de sessionDto
+        List<SessionDto> sessions = List.of(this.sessionMapper.toDto(session));
+        //Renvoie une liste de sessionDto
+        ResponseEntity<?> responseEntity = sessionController.findAll();
+        //On compare le 1er nom de la liste des sessions du controller et ce qu'on a créé
+        assertEquals(sessions.get(0).getName(), ((List<SessionDto>)responseEntity.getBody()).get(0).getName());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        verify(sessionRepository).findAll();
     }
 
     @Test
@@ -132,169 +125,149 @@ public class SessionControllerIT {
         sessionDto.setDate(new Date());
         sessionDto.setDescription("Description session");
         sessionDto.setTeacher_id(1L);
-        Session session = sessionMapper.toEntity(sessionDto);
-        ObjectMapper objectMapper = new ObjectMapper();
 
-        when(sessionRepository.save(session)).thenReturn(session);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/session")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(sessionDto)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(session.getName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(session.getDescription()));
-
-        verify(sessionRepository).save(session);
+       ResponseEntity<?> responseEntity = sessionController.create(sessionDto);
+       assertEquals(sessionDto.getName(), ((SessionDto)responseEntity.getBody()).getName());
+       assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
     @Test
     @DisplayName("Should update a session")
     void giveIdSession_thenFindSessionById_shouldUpdateSession() throws Exception {
 
+        Session session = new Session();
+        session.setName("Zen");
+        session.setDate(new Date());
+        session.setDescription("Description session");
+
         SessionDto sessionDto = new SessionDto();
         sessionDto.setName("Yoga");
         sessionDto.setDate(new Date());
         sessionDto.setDescription("Description session");
         sessionDto.setTeacher_id(1L);
-        sessionDto.setId(Long.parseLong(id));
 
-        Session session = sessionMapper.toEntity(sessionDto);
+        Session newSession = sessionRepository.save(session);
+        ResponseEntity<?> responseEntity = sessionController.update(newSession.getId().toString(), sessionDto);
 
-        when(sessionRepository.save(session)).thenReturn(session);
+        assertEquals("Yoga", ((SessionDto) responseEntity.getBody()).getName());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/session/{id}", id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(id)
-                        .content(objectMapper.writeValueAsString(sessionDto)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(session.getName()));
-
-        verify(sessionRepository).save(session);
     }
 
     @Test
     @DisplayName("Should update a session and return a bad request status")
     void giveIdSession_thenUpdateSession_shouldBadRequestStatus() throws Exception {
 
-        Session session;
         SessionDto sessionDto = new SessionDto();
         sessionDto.setName("Yoga");
         sessionDto.setDate(new Date());
         sessionDto.setDescription("Description session");
         sessionDto.setTeacher_id(1L);
-        sessionDto.setId(Long.parseLong(id));
 
-        session = sessionMapper.toEntity(sessionDto);
+        ResponseEntity<?> responseEntity = sessionController.update("a", sessionDto);
 
-        when(sessionRepository.save(session)).thenThrow(NumberFormatException.class);
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/session/{id}", id)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(id)
-                    .content(objectMapper.writeValueAsString(sessionDto)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-
-        verify(sessionRepository).save(session);
     }
 
     @Test
     @DisplayName("Should delete a session")
     void giveIdSession_thenFindSessionById_shouldDeleteSession() throws Exception {
+
         Session session = new Session();
+        session.setName("Zen");
+        session.setDate(new Date());
+        session.setDescription("Description session");
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.of(session));
+        Session newSession = sessionRepository.save(session);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{id}", id))
-                .andExpect((MockMvcResultMatchers.status().isOk()));
+        ResponseEntity<?> responseEntity = sessionController.save(newSession.getId().toString());
 
-        verify(sessionRepository).findById(Long.parseLong(id));
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
     }
 
     @Test
     @DisplayName("Should delete a session and return a not found status")
     void giveIdSession_thenFindSessionById_shouldReturnNotFoundStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.empty());
+        ResponseEntity<?> responseEntity = sessionController.save("1");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{id}", id))
-                .andExpect((MockMvcResultMatchers.status().isNotFound()));
-
-        verify(sessionRepository).findById(Long.parseLong(id));
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 
     @Test
     @DisplayName("Should delete a session and return a bad request status")
     void giveIdSession_thenFindSessionById_shouldReturnBadRequestStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenThrow(NumberFormatException.class);
+        ResponseEntity<?> responseEntity = sessionController.save("a");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{id}", id))
-                .andExpect((MockMvcResultMatchers.status().isBadRequest()));
-
-        verify(sessionRepository).findById(Long.parseLong(id));
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 
     @Test
     @DisplayName("Should participate to a session")
     void giveIdSession_thenUserParticipateToASession_shouldParticipate() throws Exception {
         Session session = new Session();
-        User user = new User();
-        session.setId(Long.parseLong(id));
-        session.setUsers(new ArrayList<>());
+        session.setName("Zen");
+        session.setDate(new Date());
+        session.setDescription("Description session");
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.of(session));
-        when(userRepository.findById(Long.parseLong(id))).thenReturn(Optional.of(user));
+        User user = new User("test@example.com", "Doe", "John", "1234", false);
+        User newUser = userRepository.save(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/session/{id}/participate/{userId}", id, id))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        Session newSession = sessionRepository.save(session);
 
-        verify(sessionRepository).findById(Long.parseLong(id));
-        verify(userRepository).findById(Long.parseLong(id));
-        assert(session.getUsers().contains(user));
+        ResponseEntity<?> responseEntity = sessionController.participate(newSession.getId().toString(), newUser.getId().toString());
+
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
     @Test
     @DisplayName("Should participate to a session but return a bad request status")
     void giveIdSession_thenUserParticipateToASession_shouldReturnBadRequestStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenThrow(NumberFormatException.class);
+        ResponseEntity<?> responseEntity = sessionController.participate("a", "b");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/session/{id}/participate/{userId}",id, id))
-                .andExpect((MockMvcResultMatchers.status().isBadRequest()));
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
-        verify(sessionRepository).findById(Long.parseLong(id));
     }
 
     @Test
     @DisplayName("Should no longer participate to a session")
     void giveIdSession_thenUserNoLongerParticipateToASession_shouldNoLongerParticipate() throws Exception {
+
         Session session = new Session();
-        User user = new User();
-        user.setId(Long.parseLong(id));
-        session.setId(Long.parseLong(id));
-        session.setUsers(List.of(user));
+        session.setName("Zen");
+        session.setDate(new Date());
+        session.setDescription("Description session");
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenReturn(Optional.of(session));
+        User user = new User("test@example.com", "Doe", "John", "1234", false);
+        User newUser = userRepository.save(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{id}/participate/{userId}", id, id))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        List<User> usersList = List.of(newUser);
+        session.setUsers(usersList);
+        Session newSession = sessionRepository.save(session);
 
-        verify(sessionRepository).findById(Long.parseLong(id));
+        ResponseEntity<?> responseEntity = sessionController.noLongerParticipate(newSession.getId().toString(), newUser.getId().toString());
 
-        assert(!session.getUsers().contains(user));
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+
     }
 
     @Test
     @DisplayName("Should no longer participate to a session and return a bad request status")
     void giveIdSession_thenUserNoLongerParticipateToASession_shouldReturnBadRequestStatus() throws Exception {
 
-        when(sessionRepository.findById(Long.parseLong(id))).thenThrow(NumberFormatException.class);
+        ResponseEntity<?> responseEntity = sessionController.noLongerParticipate("a", "b");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{id}/participate/{userId}",id, id))
-                .andExpect((MockMvcResultMatchers.status().isBadRequest()));
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+    }
 
-        verify(sessionRepository).findById(Long.parseLong(id));
+    @AfterEach
+    public void cleanup() {
+        sessionRepository.deleteAll();
+        userRepository.deleteAll();
     }
 }

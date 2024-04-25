@@ -162,9 +162,4 @@ public class UserControllerIT {
 
         verify(userRepository).findById(Long.parseLong(id));
     }
-
-
-
-
-
 }
