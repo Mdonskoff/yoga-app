@@ -13,7 +13,7 @@ import com.openclassrooms.starterjwt.repository.UserRepository;
 public class UserDetailsServiceImpl implements UserDetailsService {
   UserRepository userRepository;
 
-  UserDetailsServiceImpl(UserRepository userRepository) {
+  public UserDetailsServiceImpl(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
