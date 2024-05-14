@@ -24,7 +24,7 @@ import com.openclassrooms.starterjwt.security.jwt.AuthEntryPointJwt;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class AuthEntryPointJwtTest {
-    private AuthEntryPointJwt authEntryPointJwt = new AuthEntryPointJwt();
+    private final AuthEntryPointJwt authEntryPointJwt = new AuthEntryPointJwt();
 
     @Test
     void testCommence() throws IOException, ServletException {

@@ -65,7 +65,7 @@ public class UserDetailsImplTest {
     }
 
     @Test
-    void testEquals_SameObject() {
+    void testEqualsSameObject() {
         // GIVEN
         UserDetailsImpl sameUserDetails = userDetails;
 
@@ -74,7 +74,7 @@ public class UserDetailsImplTest {
     }
 
     @Test
-    void testEquals_DifferentClass() {
+    void testEqualsDifferentClass() {
         // GIVEN
         Object differentObject = new Object();
 
@@ -83,7 +83,7 @@ public class UserDetailsImplTest {
     }
 
     @Test
-    void testEquals_DifferentId() {
+    void testEqualsDifferentId() {
         // GIVEN
         UserDetailsImpl differentUserDetails = UserDetailsImpl.builder().id(2L).build();
 
@@ -92,7 +92,7 @@ public class UserDetailsImplTest {
     }
 
     @Test
-    void testEquals_SameId() {
+    void testEqualsSameId() {
         // GIVEN
         UserDetailsImpl sameIdUserDetails = UserDetailsImpl.builder().id(1L).build();
 

@@ -29,27 +29,27 @@ class JwtUtilsTest {
     @Test
     void generateJwtToken() {
         Authentication authentication = mock(Authentication.class);
-        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"yoga@yoga.com","firstname","lastname",false,"password"));
+        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"test@yoga.com","Donald","Duck",false,"password"));
         assertThat(jwtUtils.generateJwtToken(authentication)).asString();
     }
 
     @Test
     void getUserNameFromJwtToken() {
         Authentication authentication = mock(Authentication.class);
-        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"yoga@yoga.com","firstname","lastname",false,"password"));
-        assertThat(jwtUtils.getUserNameFromJwtToken(jwtUtils.generateJwtToken(authentication))).isEqualTo("yoga@yoga.com");
+        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"test@yoga.com","Donald","Duck",false,"password"));
+        assertThat(jwtUtils.getUserNameFromJwtToken(jwtUtils.generateJwtToken(authentication))).isEqualTo("test@yoga.com");
     }
 
     @Test
     void validateJwtTokenWhenIsTrue() {
         Authentication authentication = mock(Authentication.class);
-        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"yoga@yoga.com","firstname","lastname",false,"password"));
+        when(authentication.getPrincipal()).thenReturn(new UserDetailsImpl(10l,"test@yoga.com","Donald","Duck",false,"password"));
         assertThat(jwtUtils.validateJwtToken(jwtUtils.generateJwtToken(authentication))).isTrue();
     }
 
     @Test
     void validateJwtTokenWhenIsFalse() {
-        String token = "cenestpasuntoken";
+        String token = "Ce n'est pas un token";
         assertThat(jwtUtils.validateJwtToken(token)).isFalse();
         token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5b2dhQHlvZ2EuY29tIiwiaWF0IjoxNjg4ODIxODg5LCJleHAiOjE2ODg4MzM4ODl9.JMWLr4X4c-4uWZKWoUJ7XHjnUE3p1SJa942RGPX5Rex4kJCdtycT5-tRbuthSrlSNizpff-VP0-d0a6-aQ";
         assertThat(jwtUtils.validateJwtToken(token)).isFalse();

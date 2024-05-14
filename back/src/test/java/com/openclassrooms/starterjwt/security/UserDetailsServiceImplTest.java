@@ -8,7 +8,6 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,11 +38,11 @@ public class UserDetailsServiceImplTest {
     void loadUserByUsernameTest() {
 
         // GIVEN
-        User user = new User(1L, "user1@mail.com", "User", "USER", "password", false, LocalDateTime.now(), LocalDateTime.now());
-        when(userRepository.findByEmail("user1@mail.com")).thenReturn(java.util.Optional.of(user));
+        User user = new User(1L, "test@yoga.com", "Duck", "Donald", "password", false, LocalDateTime.now(), LocalDateTime.now());
+        when(userRepository.findByEmail("test@yoga.com")).thenReturn(java.util.Optional.of(user));
 
         // WHEN
-        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername("user1@mail.com");
+        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername("test@yoga.com");
 
         // THEN
         assertThat(userDetails.getUsername()).isEqualTo(user.getEmail());
@@ -56,12 +55,12 @@ public class UserDetailsServiceImplTest {
     @Test
     void loadUserByUsernameUserNotFoundTest() {
         // GIVEN
-        when(userRepository.findByEmail("user1@mail.com")).thenReturn(java.util.Optional.empty());
+        when(userRepository.findByEmail("test@yoga.com")).thenReturn(java.util.Optional.empty());
 
         // WHEN / THEN
-        assertThatThrownBy(() -> userDetailsServiceImpl.loadUserByUsername("user1@mail.com"))
+        assertThatThrownBy(() -> userDetailsServiceImpl.loadUserByUsername("test@yoga.com"))
                 .isInstanceOf(UsernameNotFoundException.class)
-                .hasMessage("User Not Found with email: user1@mail.com");
+                .hasMessage("User Not Found with email: test@yoga.com");
     }
 
     @Test
@@ -69,9 +68,9 @@ public class UserDetailsServiceImplTest {
     public void giveUserEmail_thenLoadUserByUsername_shouldReturnUserDetailsImplObject() {
         userDetailsService = new UserDetailsServiceImpl(userRepository);
 
-        String email = "test@test.fr";
+        String email = "test@test.com";
         User user = new User();
-        user.setId(1L).setEmail(email).setLastName("Delore").setFirstName("Victore").setPassword("test");
+        user.setId(1L).setEmail(email).setLastName("Duck").setFirstName("Donald").setPassword("1234");
         UserDetails userDetails = UserDetailsImpl
                 .builder()
                 .id(user.getId())
