@@ -2,12 +2,14 @@ package com.openclassrooms.starterjwt.mapper;
 
 import com.openclassrooms.starterjwt.dto.SessionDto;
 import com.openclassrooms.starterjwt.models.Session;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class SessionMapperTest {
@@ -21,8 +23,8 @@ public class SessionMapperTest {
         SessionDto sessionDto = null;
         List<SessionDto> sessionDtoList = null;
 
-        Assertions.assertNull(sessionMapper.toEntity(sessionDto));
-        Assertions.assertNull(sessionMapper.toEntity(sessionDtoList));
+        assertNull(sessionMapper.toEntity(sessionDto));
+        assertNull(sessionMapper.toEntity(sessionDtoList));
 
     }
 
@@ -32,9 +34,27 @@ public class SessionMapperTest {
         Session session = null;
         List<Session> sessionList = null;
 
-        Assertions.assertNull(sessionMapper.toDto(session));
-        Assertions.assertNull(sessionMapper.toDto(sessionList));
+        assertNull(sessionMapper.toDto(session));
+        assertNull(sessionMapper.toDto(sessionList));
 
     }
+
+    @Test
+    public void testToEntityWithValidDtoList() {
+        // Créer une liste de DTO
+        List<SessionDto> dtoList = new ArrayList<>();
+        SessionDto dto1 = new SessionDto();
+        SessionDto dto2 = new SessionDto();
+        dtoList.add(dto1);
+        dtoList.add(dto2);
+
+        // Appeler la méthode à tester
+        List<Session> result = sessionMapper.toEntity(dtoList);
+
+        // Vérifier si la liste résultante contient les entités converties
+        assertNotNull(result);
+        assertEquals(dtoList.size(), result.size());
+    }
+
 
 }
