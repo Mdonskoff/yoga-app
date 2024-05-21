@@ -8,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SessionService } from 'src/app/services/session.service';
 
 import { MeComponent } from './me.component';
+import {of} from "rxjs";
 
 describe('MeComponent', () => {
   let component: MeComponent;
@@ -19,6 +20,12 @@ describe('MeComponent', () => {
       id: 1
     }
   }
+
+  const mockUserService = {
+    getById :  jest.fn(data => of("user")),
+    delete : jest.fn(data => of("user")),
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MeComponent],
@@ -42,4 +49,20 @@ describe('MeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get user', async() => {
+    const userServiceSpy = jest.spyOn(mockUserService, 'getById');
+
+    component.ngOnInit();
+
+    expect(userServiceSpy).toHaveBeenCalled()
+  })
+
+  it('should delete a user', async() => {
+    const userServiceSpy = jest.spyOn(mockUserService, 'delete');
+
+    component.delete();
+
+    expect(userServiceSpy).toHaveBeenCalled()
+  })
 });
