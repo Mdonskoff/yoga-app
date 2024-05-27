@@ -23,7 +23,7 @@ describe('ListComponent', () => {
       imports: [HttpClientModule, MatCardModule, MatIconModule],
       providers: [{ provide: SessionService, useValue: mockSessionService }]
     })
-      .compileComponents();
+    .compileComponents();
 
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;
