@@ -1,6 +1,6 @@
 {
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/polyfills.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/polyfills.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/polyfills.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/polyfills.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -13,17 +13,17 @@
       "names": [],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/polyfills.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/polyfills.ts"
       ],
       "sourcesContent": [
         "/**\n * This file includes polyfills needed by Angular and is loaded before the app.\n * You can add your own extra polyfills to this file.\n *\n * This file is divided into 2 sections:\n *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.\n *   2. Application imports. Files imported after ZoneJS that should be loaded before your main\n *      file.\n *\n * The current setup is for so-called \"evergreen\" browsers; the last versions of browsers that\n * automatically update themselves. This includes recent versions of Safari, Chrome (including\n * Opera), Edge on the desktop, and iOS and Chrome on mobile.\n *\n * Learn more in https://angular.io/guide/browser-support\n */\n\n/***************************************************************************************************\n * BROWSER POLYFILLS\n */\n\n/**\n * By default, zone.js will patch all possible macroTask and DomEvents\n * user can disable parts of macroTask/DomEvents patch by setting following flags\n * because those flags need to be set before `zone.js` being loaded, and webpack\n * will put import in the top of bundle, so user need to create a separate file\n * in this directory (for example: zone-flags.ts), and put the following flags\n * into that file, and then add the following code before importing zone.js.\n * import './zone-flags';\n *\n * The flags allowed in zone-flags.ts are listed here.\n *\n * The following flags will work for all browsers.\n *\n * (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame\n * (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick\n * (window as any).__zone_symbol__UNPATCHED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames\n *\n *  in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js\n *  with the following flag, it will bypass `zone.js` patch for IE/Edge\n *\n *  (window as any).__Zone_enable_cross_context_check = true;\n *\n */\n\n/***************************************************************************************************\n * Zone JS is required by default for Angular itself.\n */\nimport 'zone.js';  // Included with Angular CLI.\n\n\n/***************************************************************************************************\n * APPLICATION IMPORTS\n */\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "022fc0584b7368e3eaebc04de5fd6046a0df037f"
+    "hash": "5e6aff066fee25f2b259d812c04c477b28741d0d"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/session.service.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/session.service.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/session.service.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/session.service.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -385,35 +385,35 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 1028,
-      "4": 11,
-      "5": 11,
-      "6": 11,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 14,
-      "11": 15,
-      "12": 15,
-      "13": 15,
-      "14": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 225,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 3,
+      "11": 3,
+      "12": 3,
+      "13": 3,
+      "14": 3
     },
     "f": {
-      "0": 15,
-      "1": 15,
-      "2": 1028,
-      "3": 11,
-      "4": 3,
-      "5": 14,
-      "6": 15
+      "0": 3,
+      "1": 3,
+      "2": 225,
+      "3": 3,
+      "4": 0,
+      "5": 3,
+      "6": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -438,17 +438,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/session.service.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/session.service.ts"
       ],
       "sourcesContent": [
         "import { Injectable } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { SessionInformation } from '../interfaces/sessionInformation.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class SessionService {\n\n  public isLogged = false;\n  public sessionInformation: SessionInformation | undefined;\n\n  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);\n\n  public $isLogged(): Observable<boolean> {\n    return this.isLoggedSubject.asObservable();\n  }\n\n  public logIn(user: SessionInformation): void {\n    this.sessionInformation = user;\n    this.isLogged = true;\n    this.next();\n  }\n\n  public logOut(): void {\n    this.sessionInformation = undefined;\n    this.isLogged = false;\n    this.next();\n  }\n\n  private next(): void {\n    this.isLoggedSubject.next(this.isLogged);\n  }\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "28e6f7ab30eacd50cd5c86f07e4f7205bd921324"
+    "hash": "27f74ce838eeb201334cabf094ce6e721b1f0c20"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/user.service.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/user.service.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/user.service.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/user.service.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -702,27 +702,27 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 3,
-      "2": 3,
-      "3": 3,
-      "4": 1,
-      "5": 15,
-      "6": 3,
-      "7": 15,
-      "8": 15
+      "0": 3,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 3,
+      "6": 0,
+      "7": 3,
+      "8": 3
     },
     "f": {
-      "0": 15,
-      "1": 3,
-      "2": 3,
-      "3": 1,
-      "4": 3
+      "0": 3,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
     },
     "b": {
       "0": [
-        3,
-        3
+        0,
+        0
       ]
     },
     "inputSourceMap": {
@@ -743,17 +743,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/user.service.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/user.service.ts"
       ],
       "sourcesContent": [
         "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { User } from '../interfaces/user.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class UserService {\n\n  private pathService = 'api/user';\n\n  constructor(private httpClient: HttpClient) { }\n\n  public getById(id: string): Observable<User> {\n    return this.httpClient.get<User>(`${this.pathService}/${id}`);\n  }\n\n  public delete(id: string): Observable<any> {\n    return this.httpClient.delete(`${this.pathService}/${id}`);\n  }\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "97616ed92bb0c9dd407d49fb68b2c0389eb2781f"
+    "hash": "cb2ce86a3acacb611481f65c628373681c59fd75"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/me/me.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/me/me.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/me/me.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/me/me.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2229,139 +2229,139 @@
       }
     },
     "s": {
-      "0": 6,
-      "1": 2,
-      "2": 2,
-      "3": 2,
-      "4": 8,
-      "5": 1,
-      "6": 1,
-      "7": 1,
-      "8": 1,
-      "9": 1,
-      "10": 1,
-      "11": 1,
-      "12": 1,
-      "13": 1,
-      "14": 1,
-      "15": 1,
-      "16": 1,
-      "17": 1,
-      "18": 1,
-      "19": 1,
-      "20": 14,
-      "21": 3,
-      "22": 3,
-      "23": 3,
-      "24": 3,
-      "25": 3,
-      "26": 3,
-      "27": 3,
-      "28": 3,
-      "29": 3,
-      "30": 3,
-      "31": 3,
-      "32": 3,
-      "33": 3,
-      "34": 3,
-      "35": 3,
-      "36": 3,
-      "37": 3,
-      "38": 3,
-      "39": 3,
-      "40": 3,
-      "41": 3,
-      "42": 14,
-      "43": 11,
-      "44": 11,
-      "45": 11,
-      "46": 11,
-      "47": 11,
-      "48": 11,
-      "49": 11,
-      "50": 11,
-      "51": 11,
-      "52": 11,
-      "53": 11,
-      "54": 11,
-      "55": 11,
-      "56": 15,
-      "57": 3,
-      "58": 3,
-      "59": 3,
-      "60": 3,
-      "61": 3,
-      "62": 3,
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0,
+      "34": 0,
+      "35": 0,
+      "36": 0,
+      "37": 0,
+      "38": 0,
+      "39": 0,
+      "40": 0,
+      "41": 0,
+      "42": 0,
+      "43": 0,
+      "44": 0,
+      "45": 0,
+      "46": 0,
+      "47": 0,
+      "48": 0,
+      "49": 0,
+      "50": 0,
+      "51": 0,
+      "52": 0,
+      "53": 0,
+      "54": 0,
+      "55": 0,
+      "56": 3,
+      "57": 0,
+      "58": 0,
+      "59": 0,
+      "60": 0,
+      "61": 0,
+      "62": 0,
       "63": 0,
-      "64": 1,
-      "65": 1,
-      "66": 1,
-      "67": 1,
-      "68": 15,
-      "69": 3,
-      "70": 15,
-      "71": 29,
-      "72": 3,
-      "73": 3,
+      "64": 0,
+      "65": 0,
+      "66": 0,
+      "67": 0,
+      "68": 3,
+      "69": 0,
+      "70": 3,
+      "71": 0,
+      "72": 0,
+      "73": 0,
       "74": 0,
-      "75": 3,
-      "76": 3,
-      "77": 3,
-      "78": 3,
-      "79": 3,
-      "80": 3,
-      "81": 3,
-      "82": 3,
-      "83": 3,
-      "84": 29,
-      "85": 26,
-      "86": 26,
-      "87": 15
+      "75": 0,
+      "76": 0,
+      "77": 0,
+      "78": 0,
+      "79": 0,
+      "80": 0,
+      "81": 0,
+      "82": 0,
+      "83": 0,
+      "84": 0,
+      "85": 0,
+      "86": 0,
+      "87": 3
     },
     "f": {
-      "0": 6,
-      "1": 8,
-      "2": 1,
-      "3": 14,
-      "4": 15,
-      "5": 3,
-      "6": 3,
-      "7": 3,
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 3,
+      "5": 0,
+      "6": 0,
+      "7": 0,
       "8": 0,
-      "9": 1,
-      "10": 1,
-      "11": 3,
-      "12": 29,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
       "13": 0
     },
     "b": {
       "0": [
-        2,
-        4
+        0,
+        0
       ],
       "1": [
-        1,
-        7
+        0,
+        0
       ],
       "2": [
-        3,
-        11
+        0,
+        0
       ],
       "3": [
-        11,
-        3
+        0,
+        0
       ],
       "4": [
-        3,
-        3
+        0,
+        0
       ],
       "5": [
-        3,
-        26
+        0,
+        0
       ],
       "6": [
-        26,
-        3
+        0,
+        0
       ]
     },
     "inputSourceMap": {
@@ -2400,8 +2400,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/me/me.component.html",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/me/me.component.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/me/me.component.html",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/me/me.component.ts"
       ],
       "sourcesContent": [
         "<div class=\"m3\">\n  <mat-card>\n    <mat-card-title>\n      <div fxLayout=\"row\" fxLayoutAlign=\"start center\">\n        <button mat-icon-button (click)=\"back()\">\n          <mat-icon>arrow_back</mat-icon>\n        </button>\n        <h1>User information</h1>\n      </div>\n    </mat-card-title>\n    <mat-card-content>\n      <div *ngIf=\"user\" fxLayout=\"column\" fxLayoutAlign=\"start center\">\n        <p>Name: {{ user.firstName }} {{ user.lastName | uppercase }}</p>\n        <p>Email: {{ user.email }}</p>\n        <p *ngIf=\"user.admin\" class=\"my2\">You are admin</p>\n        <div *ngIf=\"!user.admin\" fxLayout=\"column\" class=\"my2\" fxLayoutAlign=\"center center\">\n          <p>Delete my account:</p>\n          <button mat-raised-button color=\"warn\" (click)=\"delete()\">\n            <mat-icon>delete</mat-icon>\n            <span class=\"ml1\">Detail</span>\n          </button>\n        </div>\n        <div fxLayoutAlign=\"space-between center\" class=\"p2 w100\">\n\n          <p><i>Create at: </i> {{ user.createdAt | date: 'longDate'}}</p>\n          <p><i>Last update: </i> {{ user.updatedAt| date: 'longDate'}}</p>\n        </div>\n      </div>\n    </mat-card-content>\n  </mat-card>\n</div>\n",
@@ -2409,10 +2409,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "cc4ca84eb61d1080a7158f8bf7a02afb96065280"
+    "hash": "0a381d592237394b3a6d2f501c9d47fc27791b27"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/not-found/not-found.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/not-found/not-found.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/not-found/not-found.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/not-found/not-found.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2654,29 +2654,29 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 1,
-      "3": 15,
-      "4": 3,
-      "5": 1,
-      "6": 1,
-      "7": 1,
-      "8": 15
+      "0": 3,
+      "1": 3,
+      "2": 0,
+      "3": 3,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 3
     },
     "f": {
-      "0": 15,
-      "1": 1,
-      "2": 3
+      "0": 3,
+      "1": 0,
+      "2": 0
     },
     "b": {
       "0": [
-        1,
-        1
+        0,
+        0
       ],
       "1": [
-        1,
-        2
+        0,
+        0
       ]
     },
     "inputSourceMap": {
@@ -2693,8 +2693,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/not-found/not-found.component.ts",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/components/not-found/not-found.component.html"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/not-found/not-found.component.ts",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/components/not-found/not-found.component.html"
       ],
       "sourcesContent": [
         "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-not-found',\n  templateUrl: './not-found.component.html',\n  styleUrls: ['./not-found.component.scss']\n})\nexport class NotFoundComponent {\n}\n",
@@ -2702,10 +2702,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "476f21db41be87c83140d12ec73129de18378508"
+    "hash": "8849c6d5a41bd48e816f88898033bfab4e0e9015"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/auth.guard.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/auth.guard.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/auth.guard.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/auth.guard.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2991,32 +2991,32 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 11,
-      "2": 11,
-      "3": 14,
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
       "4": 0,
       "5": 0,
-      "6": 14,
-      "7": 15,
-      "8": 11,
-      "9": 15,
-      "10": 15
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 3
     },
     "f": {
-      "0": 15,
-      "1": 11,
-      "2": 14,
-      "3": 11
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3
     },
     "b": {
       "0": [
         0,
-        14
+        3
       ],
       "1": [
-        11,
-        11
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -3037,17 +3037,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/auth.guard.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/auth.guard.ts"
       ],
       "sourcesContent": [
         "import {Injectable} from \"@angular/core\";\nimport {CanActivate, Router} from \"@angular/router\"; \nimport { SessionService } from \"../services/session.service\";\n\n@Injectable({providedIn: 'root'})\nexport class AuthGuard implements CanActivate {\n\n  constructor( \n    private router: Router,\n    private sessionService: SessionService,\n  ) {\n  }\n\n  public canActivate(): boolean {\n    if (!this.sessionService.isLogged) {\n      this.router.navigate(['login']);\n      return false;\n    }\n    return true;\n  }\n}"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "23a1b6eb015057103c9d411e67afa7fdf6347b0d"
+    "hash": "04fb870c994614abb80b2aa6aef777c668afc561"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/unauth.guard.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/unauth.guard.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/unauth.guard.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/unauth.guard.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3333,32 +3333,32 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 14,
-      "2": 14,
-      "3": 17,
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
       "4": 0,
       "5": 0,
-      "6": 17,
-      "7": 15,
-      "8": 14,
-      "9": 15,
-      "10": 15
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 3
     },
     "f": {
-      "0": 15,
-      "1": 14,
-      "2": 17,
-      "3": 14
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3
     },
     "b": {
       "0": [
         0,
-        17
+        3
       ],
       "1": [
-        14,
-        14
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -3379,17 +3379,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/guards/unauth.guard.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/guards/unauth.guard.ts"
       ],
       "sourcesContent": [
         "import {Injectable} from \"@angular/core\";\nimport {CanActivate, Router} from \"@angular/router\"; \nimport { SessionService } from \"../services/session.service\";\n\n@Injectable({providedIn: 'root'})\nexport class UnauthGuard implements CanActivate {\n\n  constructor( \n    private router: Router,\n    private sessionService: SessionService,\n  ) {\n  }\n\n  public canActivate(): boolean {\n    if (this.sessionService.isLogged) {\n      this.router.navigate(['rentals']);\n      return false;\n    }\n    return true;\n  }\n}"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "83932723178e10c533389257906384a4c95cc95d"
+    "hash": "fe8cc1d3452fd7309ee27298cd7c5bedb9de36a7"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app-routing.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app-routing.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app-routing.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app-routing.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3687,30 +3687,30 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 11,
-      "4": 11,
-      "5": 15,
-      "6": 15,
-      "7": 15,
-      "8": 15,
-      "9": 15,
-      "10": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 3
     },
     "f": {
-      "0": 15,
-      "1": 15,
-      "2": 11,
-      "3": 11,
-      "4": 15,
-      "5": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -3737,17 +3737,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app-routing.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app-routing.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { MeComponent } from './components/me/me.component';\nimport { NotFoundComponent } from './components/not-found/not-found.component';\nimport { AuthGuard } from './guards/auth.guard';\nimport { UnauthGuard } from './guards/unauth.guard';\n\nconst routes: Routes = [\n  {\n    path: '',\n    canActivate: [UnauthGuard],\n    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)\n  },\n  {\n    path: 'sessions',\n    canActivate: [AuthGuard],\n    loadChildren: () => import('./features/sessions/sessions.module').then(m => m.SessionsModule)\n  },\n  {\n    path: 'me',\n    canActivate: [AuthGuard],\n    component: MeComponent\n  },\n  { path: '404', component: NotFoundComponent },\n  { path: '**', redirectTo: '404' }\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule {\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "cc44a8fe030e2b510fc8c007a32bc581bd26239a"
+    "hash": "17b34394177327abd8355e21fed9529079b1fc7d"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/services/auth.service.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/services/auth.service.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/services/auth.service.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/services/auth.service.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -4001,27 +4001,27 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 3,
-      "4": 11,
-      "5": 15,
-      "6": 15,
-      "7": 15,
-      "8": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 0,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3
     },
     "f": {
-      "0": 15,
-      "1": 15,
-      "2": 3,
-      "3": 11,
-      "4": 15
+      "0": 3,
+      "1": 3,
+      "2": 0,
+      "3": 3,
+      "4": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -4043,17 +4043,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/services/auth.service.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/services/auth.service.ts"
       ],
       "sourcesContent": [
         "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { LoginRequest } from '../interfaces/loginRequest.interface';\nimport { RegisterRequest } from '../interfaces/registerRequest.interface';\nimport { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AuthService {\n\n  private pathService = 'api/auth';\n\n  constructor(private httpClient: HttpClient) { }\n\n  public register(registerRequest: RegisterRequest): Observable<void> {\n    return this.httpClient.post<void>(`${this.pathService}/register`, registerRequest);\n  }\n\n  public login(loginRequest: LoginRequest): Observable<SessionInformation> {\n    return this.httpClient.post<SessionInformation>(`${this.pathService}/login`, loginRequest);\n  }\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8200014ee91c8f08a3b2a2a0674914bd527c487d"
+    "hash": "60e7b11db225984df5ab65519927709032b1ff32"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -4937,86 +4937,86 @@
       }
     },
     "s": {
-      "0": 377,
-      "1": 11,
-      "2": 11,
-      "3": 11,
-      "4": 11,
-      "5": 11,
-      "6": 11,
-      "7": 11,
-      "8": 11,
-      "9": 11,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 11,
-      "14": 11,
-      "15": 680,
-      "16": 18,
-      "17": 18,
-      "18": 18,
-      "19": 18,
-      "20": 18,
-      "21": 18,
-      "22": 15,
-      "23": 15,
-      "24": 15,
-      "25": 15,
-      "26": 1028,
-      "27": 2,
-      "28": 2,
-      "29": 15,
-      "30": 15,
-      "31": 15,
-      "32": 1043,
-      "33": 15,
-      "34": 15,
-      "35": 15,
-      "36": 15,
-      "37": 15,
-      "38": 15,
-      "39": 15,
-      "40": 15,
-      "41": 15,
-      "42": 15,
-      "43": 1043,
-      "44": 1028,
-      "45": 1028,
-      "46": 1028,
-      "47": 15
+      "0": 96,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 3,
+      "14": 3,
+      "15": 135,
+      "16": 3,
+      "17": 3,
+      "18": 3,
+      "19": 3,
+      "20": 3,
+      "21": 3,
+      "22": 3,
+      "23": 3,
+      "24": 3,
+      "25": 3,
+      "26": 225,
+      "27": 0,
+      "28": 0,
+      "29": 3,
+      "30": 3,
+      "31": 3,
+      "32": 228,
+      "33": 3,
+      "34": 3,
+      "35": 3,
+      "36": 3,
+      "37": 3,
+      "38": 3,
+      "39": 3,
+      "40": 3,
+      "41": 3,
+      "42": 3,
+      "43": 228,
+      "44": 225,
+      "45": 225,
+      "46": 225,
+      "47": 3
     },
     "f": {
-      "0": 377,
-      "1": 2,
-      "2": 680,
-      "3": 15,
-      "4": 15,
-      "5": 1028,
-      "6": 2,
-      "7": 15,
-      "8": 1043
+      "0": 96,
+      "1": 0,
+      "2": 135,
+      "3": 3,
+      "4": 3,
+      "5": 225,
+      "6": 0,
+      "7": 3,
+      "8": 228
     },
     "b": {
       "0": [
-        11,
-        366
+        3,
+        93
       ],
       "1": [
-        18,
-        662
+        3,
+        132
       ],
       "2": [
-        15,
-        15
+        3,
+        3
       ],
       "3": [
-        15,
-        1028
+        3,
+        225
       ],
       "4": [
-        1028,
-        15
+        225,
+        3
       ]
     },
     "inputSourceMap": {
@@ -5042,8 +5042,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.component.html",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.component.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.component.html",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.component.ts"
       ],
       "sourcesContent": [
         "<div class=\"app\">\n  <mat-toolbar color=\"primary\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n    <span>Yoga app</span>\n    <div *ngIf=\"$isLogged() | async; else notLogged\">\n      <span routerLink=\"sessions\" class=\"link\">Sessions</span>\n      <span routerLink=\"me\" class=\"link\">Account</span>\n      <span (click)=\"logout()\" class=\"link\">Logout</span>\n    </div>\n    <ng-template #notLogged>\n      <div>\n        <span routerLink=\"login\" class=\"link\">Login</span>\n        <span routerLink=\"register\" class=\"link\">Register</span>\n      </div>\n    </ng-template>\n  </mat-toolbar>\n  <div>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n",
@@ -5051,10 +5051,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "e5d6ea6525a88b66d48aa7c6e4f62d800d8a3b5f"
+    "hash": "dd5019d4f1141ec3c862d1a8e15da883355d6e25"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/interceptors/jwt.interceptor.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/interceptors/jwt.interceptor.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/interceptors/jwt.interceptor.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/interceptors/jwt.interceptor.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -5320,30 +5320,30 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 14,
-      "2": 52,
-      "3": 38,
-      "4": 52,
-      "5": 15,
-      "6": 14,
-      "7": 15,
-      "8": 15
+      "0": 3,
+      "1": 3,
+      "2": 15,
+      "3": 12,
+      "4": 15,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3
     },
     "f": {
-      "0": 15,
-      "1": 14,
-      "2": 52,
-      "3": 14
+      "0": 3,
+      "1": 3,
+      "2": 15,
+      "3": 3
     },
     "b": {
       "0": [
-        38,
-        14
+        12,
+        3
       ],
       "1": [
-        14,
-        14
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -5371,17 +5371,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/interceptors/jwt.interceptor.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/interceptors/jwt.interceptor.ts"
       ],
       "sourcesContent": [
         "import { HttpHandler, HttpInterceptor, HttpRequest } from \"@angular/common/http\";\nimport { Injectable } from \"@angular/core\";\nimport { SessionService } from '../services/session.service';\n\n@Injectable({ providedIn: 'root' })\nexport class JwtInterceptor implements HttpInterceptor {\n  constructor(private sessionService: SessionService) {}\n\n  public intercept(request: HttpRequest<any>, next: HttpHandler) {\n    if (this.sessionService.isLogged) {\n      request = request.clone({\n        setHeaders: {\n          Authorization: `Bearer ${this.sessionService.sessionInformation!.token}`,\n        },\n      });\n    }\n    return next.handle(request);\n  }\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "b17bbfd5e9450809779d54d94e2f04e44c811a6a"
+    "hash": "93504663f797b93d4410d534d13a5cea021732c0"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -5543,22 +5543,22 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 15,
-      "4": 15,
-      "5": 15,
-      "6": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3
     },
     "f": {
-      "0": 15,
-      "1": 15
+      "0": 3,
+      "1": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -5588,17 +5588,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/app.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/app.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { NotFoundComponent } from './components/not-found/not-found.component';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatToolbarModule } from '@angular/material/toolbar';\nimport { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';\nimport { JwtInterceptor } from './interceptors/jwt.interceptor';\nimport { MatCardModule } from '@angular/material/card';\nimport { FlexLayoutModule } from '@angular/flex-layout';\nimport { MeComponent } from './components/me/me.component';\n\nconst materialModule = [\n  MatButtonModule,\n  MatCardModule,\n  MatIconModule,\n  MatSnackBarModule,\n  MatToolbarModule,\n]\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    NotFoundComponent,\n    MeComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule, \n    FlexLayoutModule,\n    HttpClientModule,\n    ...materialModule\n  ],\n  providers: [\n    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },\n  ],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f5f1de9bada3329451cd5dd6b8fd9c023e977660"
+    "hash": "a20c51430073edb4a6ab5b63c7b426f389ca47f3"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/environments/environment.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/environments/environment.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/environments/environment.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/environments/environment.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -5614,7 +5614,7 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 15
+      "0": 3
     },
     "f": {},
     "b": {},
@@ -5628,17 +5628,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/environments/environment.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/environments/environment.ts"
       ],
       "sourcesContent": [
         "export const environment = {\n  baseUrl: 'localhost:8080/api/',\n  production: false\n};\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ac09534d996114d21f30057674f1f18848d2240a"
+    "hash": "9b2d8f2e6919b9ee9f6e8466a56faed6bc2b4364"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/main.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/main.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/main.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/main.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -5746,9 +5746,9 @@
       }
     },
     "s": {
-      "0": 15,
+      "0": 3,
       "1": 0,
-      "2": 15,
+      "2": 3,
       "3": 0
     },
     "f": {
@@ -5757,7 +5757,7 @@
     "b": {
       "0": [
         0,
-        15
+        3
       ]
     },
     "inputSourceMap": {
@@ -5777,17 +5777,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/main.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/main.ts"
       ],
       "sourcesContent": [
         "import { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\n\nimport { AppModule } from './app/app.module';\nimport { environment } from './environments/environment';\n\nif (environment.production) {\n  enableProdMode();\n}\n\nplatformBrowserDynamic().bootstrapModule(AppModule)\n  .catch(err => console.error(err));\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c28a25d2e4752eb6e8af748b1d1de2aafed61b72"
+    "hash": "0ac9e976f9842c4f0aec6efaa07b1c38f286f893"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/login/login.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/login/login.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/login/login.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/login/login.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -6825,71 +6825,71 @@
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 15,
-      "5": 13,
-      "6": 13,
-      "7": 13,
-      "8": 13,
-      "9": 13,
-      "10": 13,
-      "11": 13,
-      "12": 11,
-      "13": 11,
-      "14": 11,
-      "15": 11,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3,
+      "9": 3,
+      "10": 3,
+      "11": 3,
+      "12": 3,
+      "13": 3,
+      "14": 3,
+      "15": 3,
       "16": 0,
-      "17": 15,
-      "18": 13,
-      "19": 15,
-      "20": 479,
-      "21": 13,
-      "22": 13,
-      "23": 13,
-      "24": 13,
-      "25": 13,
-      "26": 11,
-      "27": 13,
-      "28": 13,
-      "29": 13,
-      "30": 13,
-      "31": 13,
-      "32": 13,
-      "33": 13,
-      "34": 22,
-      "35": 13,
-      "36": 13,
-      "37": 13,
-      "38": 13,
-      "39": 13,
-      "40": 13,
-      "41": 13,
-      "42": 13,
-      "43": 479,
-      "44": 466,
-      "45": 466,
-      "46": 466,
-      "47": 466,
-      "48": 466,
-      "49": 466,
-      "50": 466,
-      "51": 466,
-      "52": 466,
-      "53": 466,
-      "54": 466,
-      "55": 466,
-      "56": 15
+      "17": 3,
+      "18": 3,
+      "19": 3,
+      "20": 129,
+      "21": 3,
+      "22": 3,
+      "23": 3,
+      "24": 3,
+      "25": 3,
+      "26": 3,
+      "27": 3,
+      "28": 3,
+      "29": 3,
+      "30": 3,
+      "31": 3,
+      "32": 3,
+      "33": 3,
+      "34": 6,
+      "35": 3,
+      "36": 3,
+      "37": 3,
+      "38": 3,
+      "39": 3,
+      "40": 3,
+      "41": 3,
+      "42": 3,
+      "43": 129,
+      "44": 126,
+      "45": 126,
+      "46": 126,
+      "47": 126,
+      "48": 126,
+      "49": 126,
+      "50": 126,
+      "51": 126,
+      "52": 126,
+      "53": 126,
+      "54": 126,
+      "55": 126,
+      "56": 3
     },
     "f": {
       "0": 0,
-      "1": 15,
-      "2": 13,
-      "3": 11,
-      "4": 11,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
       "5": 0,
-      "6": 13,
-      "7": 479,
-      "8": 11,
-      "9": 22
+      "6": 3,
+      "7": 129,
+      "8": 3,
+      "9": 6
     },
     "b": {
       "0": [
@@ -6897,24 +6897,24 @@
         0
       ],
       "1": [
-        13,
-        13
+        3,
+        3
       ],
       "2": [
-        13,
-        466
+        3,
+        126
       ],
       "3": [
-        466,
-        13
+        126,
+        3
       ],
       "4": [
-        444,
-        22
+        120,
+        6
       ],
       "5": [
-        444,
-        22
+        120,
+        6
       ]
     },
     "inputSourceMap": {
@@ -6955,8 +6955,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/login/login.component.ts",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/login/login.component.html"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/login/login.component.ts",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/login/login.component.html"
       ],
       "sourcesContent": [
         "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';\nimport { SessionService } from 'src/app/services/session.service';\nimport { LoginRequest } from '../../interfaces/loginRequest.interface';\nimport { AuthService } from '../../services/auth.service';\n\n@Component({\n  selector: 'app-login',\n  templateUrl: './login.component.html',\n  styleUrls: ['./login.component.scss']\n})\nexport class LoginComponent {\n  public hide = true;\n  public onError = false;\n\n  public form = this.fb.group({\n    email: [\n      '',\n      [\n        Validators.required,\n        Validators.email\n      ]\n    ],\n    password: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3)\n      ]\n    ]\n  });\n\n  constructor(private authService: AuthService,\n              private fb: FormBuilder,\n              private router: Router,\n              private sessionService: SessionService) {\n  }\n\n  public submit(): void {\n    const loginRequest = this.form.value as LoginRequest;\n    this.authService.login(loginRequest).subscribe({\n      next: (response: SessionInformation) => {\n        this.sessionService.logIn(response);\n        this.router.navigate(['/sessions']);\n      },\n      error: error => this.onError = true,\n    });\n  }\n}\n",
@@ -6964,10 +6964,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a4f269cd91286358c87f14ca301904df0a378326"
+    "hash": "d9d14338fd65799b8dbba55f510f4b0e931ea13a"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/register/register.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/register/register.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/register/register.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/register/register.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -7825,83 +7825,83 @@
       }
     },
     "s": {
-      "0": 3,
-      "1": 1,
-      "2": 1,
-      "3": 1,
-      "4": 15,
-      "5": 3,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 3,
-      "11": 3,
-      "12": 2,
-      "13": 1,
-      "14": 15,
-      "15": 3,
-      "16": 15,
-      "17": 155,
-      "18": 3,
-      "19": 3,
-      "20": 3,
-      "21": 3,
-      "22": 3,
-      "23": 3,
-      "24": 3,
-      "25": 3,
-      "26": 3,
-      "27": 3,
-      "28": 3,
-      "29": 3,
-      "30": 3,
-      "31": 3,
-      "32": 3,
-      "33": 3,
-      "34": 3,
-      "35": 3,
-      "36": 3,
-      "37": 3,
-      "38": 3,
-      "39": 3,
-      "40": 3,
-      "41": 155,
-      "42": 152,
-      "43": 152,
-      "44": 152,
-      "45": 152,
-      "46": 152,
-      "47": 152,
-      "48": 15
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 3,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 3,
+      "15": 0,
+      "16": 3,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0,
+      "34": 0,
+      "35": 0,
+      "36": 0,
+      "37": 0,
+      "38": 0,
+      "39": 0,
+      "40": 0,
+      "41": 0,
+      "42": 0,
+      "43": 0,
+      "44": 0,
+      "45": 0,
+      "46": 0,
+      "47": 0,
+      "48": 3
     },
     "f": {
-      "0": 3,
-      "1": 15,
-      "2": 3,
-      "3": 3,
-      "4": 2,
-      "5": 1,
-      "6": 3,
-      "7": 155,
-      "8": 3
+      "0": 0,
+      "1": 3,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
     },
     "b": {
       "0": [
-        1,
-        2
+        0,
+        0
       ],
       "1": [
-        3,
-        3
+        0,
+        0
       ],
       "2": [
-        3,
-        152
+        0,
+        0
       ],
       "3": [
-        152,
-        3
+        0,
+        0
       ]
     },
     "inputSourceMap": {
@@ -7943,8 +7943,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/register/register.component.ts",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/components/register/register.component.html"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/register/register.component.ts",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/components/register/register.component.html"
       ],
       "sourcesContent": [
         "import { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../../services/auth.service';\nimport { RegisterRequest } from '../../interfaces/registerRequest.interface';\n\n@Component({\n  selector: 'app-register',\n  templateUrl: './register.component.html',\n  styleUrls: ['./register.component.scss']\n})\nexport class RegisterComponent {\n\n  public onError = false;\n\n  public form = this.fb.group({\n    email: [\n      '',\n      [\n        Validators.required,\n        Validators.email\n      ]\n    ],\n    firstName: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3),\n        Validators.max(20)\n      ]\n    ],\n    lastName: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3),\n        Validators.max(20)\n      ]\n    ],\n    password: [\n      '',\n      [\n        Validators.required,\n        Validators.min(3),\n        Validators.max(40)\n      ]\n    ]\n  });\n\n  constructor(private authService: AuthService,\n              private fb: FormBuilder,\n              private router: Router) {\n  }\n\n  public submit(): void {\n    const registerRequest = this.form.value as RegisterRequest;\n    this.authService.register(registerRequest).subscribe({\n        next: (_: void) => this.router.navigate(['/login']),\n        error: _ => this.onError = true,\n      }\n    );\n  }\n\n}\n",
@@ -7952,10 +7952,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a4954e6e8e45805349529885017d7ce7bd4eb292"
+    "hash": "896fb32934874e6f5db9fffc83fc520421ac7d8d"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth-routing.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth-routing.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth-routing.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth-routing.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -8117,22 +8117,22 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 15,
-      "4": 15,
-      "5": 15,
-      "6": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3
     },
     "f": {
-      "0": 15,
-      "1": 15
+      "0": 3,
+      "1": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -8151,17 +8151,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth-routing.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth-routing.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { LoginComponent } from './components/login/login.component';\nimport { RegisterComponent } from './components/register/register.component';\n\n\nconst routes: Routes = [\n  { title: 'Login', path: 'login', component: LoginComponent },\n  { title: 'Register', path: 'register', component: RegisterComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class AuthRoutingModule { }\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c29dc6174b15332bb1c61e8f1c2d953ffbb8e32f"
+    "hash": "d01b27f4ef0413fb42683d79fd97d53f4b7328ef"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -8323,22 +8323,22 @@
       }
     },
     "s": {
-      "0": 15,
-      "1": 15,
-      "2": 15,
-      "3": 15,
-      "4": 15,
-      "5": 15,
-      "6": 15
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3
     },
     "f": {
-      "0": 15,
-      "1": 15
+      "0": 3,
+      "1": 3
     },
     "b": {
       "0": [
-        15,
-        15
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -8360,17 +8360,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/auth/auth.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/auth/auth.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AuthRoutingModule } from './auth-routing.module';\nimport { RegisterComponent } from './components/register/register.component';\nimport { LoginComponent } from './components/login/login.component';\nimport { MatCardModule } from '@angular/material/card';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatInputModule } from '@angular/material/input';\nimport { FlexLayoutModule } from '@angular/flex-layout';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\n\nconst materialModules = [\n  MatButtonModule,\n  MatCardModule,\n  MatFormFieldModule,\n  MatIconModule,\n  MatInputModule\n]\n\n@NgModule({\n  declarations: [\n    RegisterComponent,\n    LoginComponent\n  ],\n  imports: [\n    AuthRoutingModule,\n    CommonModule,\n    FlexLayoutModule,\n    FormsModule,\n    ReactiveFormsModule,\n    ...materialModules\n  ]\n})\nexport class AuthModule { }\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "dd2e9ec4692ae4ee66fe73d1eff9cc35f6e5b8d6"
+    "hash": "414308c0a95ae3e2e4938662f6c9e60df66f7061"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/services/session-api.service.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/services/session-api.service.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/services/session-api.service.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/services/session-api.service.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -8794,37 +8794,37 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 15,
-      "4": 6,
-      "5": 1,
-      "6": 1,
-      "7": 1,
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 0,
+      "6": 0,
+      "7": 0,
       "8": 2,
       "9": 1,
-      "10": 11,
-      "11": 11,
-      "12": 11,
-      "13": 11
+      "10": 3,
+      "11": 3,
+      "12": 3,
+      "13": 3
     },
     "f": {
-      "0": 11,
-      "1": 11,
-      "2": 15,
-      "3": 6,
-      "4": 1,
-      "5": 1,
-      "6": 1,
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 0,
+      "5": 0,
+      "6": 0,
       "7": 2,
       "8": 1,
-      "9": 11
+      "9": 3
     },
     "b": {
       "0": [
-        11,
-        11
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -8854,17 +8854,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/services/session-api.service.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/services/session-api.service.ts"
       ],
       "sourcesContent": [
         "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Session } from '../interfaces/session.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class SessionApiService {\n\n  private pathService = 'api/session';\n\n  constructor(private httpClient: HttpClient) {\n  }\n\n  public all(): Observable<Session[]> {\n    return this.httpClient.get<Session[]>(this.pathService);\n  }\n\n  public detail(id: string): Observable<Session> {\n    return this.httpClient.get<Session>(`${this.pathService}/${id}`);\n  }\n\n  public delete(id: string): Observable<any> {\n    return this.httpClient.delete(`${this.pathService}/${id}`);\n  }\n\n  public create(session: Session): Observable<Session> {\n    return this.httpClient.post<Session>(this.pathService, session);\n  }\n\n  public update(id: string, session: Session): Observable<Session> {\n    return this.httpClient.put<Session>(`${this.pathService}/${id}`, session);\n  }\n\n  public participate(id: string, userId: string): Observable<void> {\n    return this.httpClient.post<void>(`${this.pathService}/${id}/participate/${userId}`, null);\n  }\n\n  public unParticipate(id: string, userId: string): Observable<void> {\n    return this.httpClient.delete<void>(`${this.pathService}/${id}/participate/${userId}`);\n  }\n\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "1170d5e058f214da3e98fc387ee2c3b33230e1fb"
+    "hash": "14d6caf4bf8407b4875cc7768dcef7adcc17de8c"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/teacher.service.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/teacher.service.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/teacher.service.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/teacher.service.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -9118,27 +9118,27 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 4,
-      "2": 4,
-      "3": 2,
-      "4": 5,
-      "5": 11,
-      "6": 4,
-      "7": 11,
-      "8": 11
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 0,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3,
+      "8": 3
     },
     "f": {
-      "0": 11,
-      "1": 4,
-      "2": 2,
-      "3": 5,
-      "4": 4
+      "0": 3,
+      "1": 3,
+      "2": 0,
+      "3": 3,
+      "4": 3
     },
     "b": {
       "0": [
-        4,
-        4
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -9159,17 +9159,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/services/teacher.service.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/services/teacher.service.ts"
       ],
       "sourcesContent": [
         "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Teacher } from '../interfaces/teacher.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class TeacherService {\n\n  private pathService = 'api/teacher';\n\n  constructor(private httpClient: HttpClient) { }\n\n  public all(): Observable<Teacher[]> {\n    return this.httpClient.get<Teacher[]>(this.pathService);\n  }\n\n  public detail(id: string): Observable<Teacher> {\n    return this.httpClient.get<Teacher>(`${this.pathService}/${id}`);\n  }\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a3ac1d8c0fdcc6e46dd68de579049682b7ce9a48"
+    "hash": "69b6e87945e9b6de65f90647d74724fa9c3695b7"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -11973,19 +11973,19 @@
       }
     },
     "s": {
-      "0": 24,
-      "1": 2,
-      "2": 2,
-      "3": 2,
-      "4": 1,
-      "5": 1,
-      "6": 1,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
       "13": 34,
       "14": 2,
       "15": 2,
@@ -12023,163 +12023,163 @@
       "47": 48,
       "48": 48,
       "49": 48,
-      "50": 45,
-      "51": 5,
-      "52": 5,
-      "53": 5,
-      "54": 5,
-      "55": 5,
-      "56": 5,
-      "57": 5,
-      "58": 45,
-      "59": 40,
-      "60": 40,
-      "61": 40,
-      "62": 75,
-      "63": 5,
-      "64": 5,
-      "65": 5,
+      "50": 33,
+      "51": 3,
+      "52": 3,
+      "53": 3,
+      "54": 3,
+      "55": 3,
+      "56": 3,
+      "57": 3,
+      "58": 33,
+      "59": 30,
+      "60": 30,
+      "61": 30,
+      "62": 51,
+      "63": 3,
+      "64": 3,
+      "65": 3,
       "66": 0,
       "67": 0,
       "68": 0,
-      "69": 5,
-      "70": 5,
-      "71": 5,
-      "72": 5,
-      "73": 5,
-      "74": 5,
-      "75": 5,
-      "76": 5,
-      "77": 5,
-      "78": 5,
-      "79": 5,
-      "80": 5,
-      "81": 5,
-      "82": 5,
-      "83": 5,
-      "84": 5,
-      "85": 5,
-      "86": 5,
-      "87": 5,
-      "88": 5,
-      "89": 5,
-      "90": 5,
-      "91": 5,
-      "92": 5,
-      "93": 5,
-      "94": 5,
-      "95": 5,
-      "96": 5,
-      "97": 5,
-      "98": 5,
-      "99": 5,
-      "100": 5,
-      "101": 5,
-      "102": 5,
-      "103": 5,
-      "104": 5,
-      "105": 5,
-      "106": 5,
-      "107": 5,
-      "108": 5,
-      "109": 5,
-      "110": 5,
-      "111": 5,
-      "112": 5,
-      "113": 5,
-      "114": 5,
-      "115": 75,
-      "116": 70,
-      "117": 70,
-      "118": 70,
-      "119": 70,
-      "120": 70,
-      "121": 70,
-      "122": 70,
-      "123": 70,
-      "124": 70,
-      "125": 70,
-      "126": 70,
-      "127": 70,
-      "128": 70,
-      "129": 70,
-      "130": 70,
-      "131": 70,
-      "132": 70,
-      "133": 70,
-      "134": 70,
-      "135": 11,
-      "136": 5,
-      "137": 5,
-      "138": 5,
-      "139": 5,
-      "140": 5,
-      "141": 5,
-      "142": 5,
-      "143": 5,
-      "144": 5,
-      "145": 5,
-      "146": 5,
-      "147": 5,
-      "148": 5,
+      "69": 3,
+      "70": 3,
+      "71": 3,
+      "72": 3,
+      "73": 3,
+      "74": 3,
+      "75": 3,
+      "76": 3,
+      "77": 3,
+      "78": 3,
+      "79": 3,
+      "80": 3,
+      "81": 3,
+      "82": 3,
+      "83": 3,
+      "84": 3,
+      "85": 3,
+      "86": 3,
+      "87": 3,
+      "88": 3,
+      "89": 3,
+      "90": 3,
+      "91": 3,
+      "92": 3,
+      "93": 3,
+      "94": 3,
+      "95": 3,
+      "96": 3,
+      "97": 3,
+      "98": 3,
+      "99": 3,
+      "100": 3,
+      "101": 3,
+      "102": 3,
+      "103": 3,
+      "104": 3,
+      "105": 3,
+      "106": 3,
+      "107": 3,
+      "108": 3,
+      "109": 3,
+      "110": 3,
+      "111": 3,
+      "112": 3,
+      "113": 3,
+      "114": 3,
+      "115": 51,
+      "116": 48,
+      "117": 48,
+      "118": 48,
+      "119": 48,
+      "120": 48,
+      "121": 48,
+      "122": 48,
+      "123": 48,
+      "124": 48,
+      "125": 48,
+      "126": 48,
+      "127": 48,
+      "128": 48,
+      "129": 48,
+      "130": 48,
+      "131": 48,
+      "132": 48,
+      "133": 48,
+      "134": 48,
+      "135": 3,
+      "136": 3,
+      "137": 3,
+      "138": 3,
+      "139": 3,
+      "140": 3,
+      "141": 3,
+      "142": 3,
+      "143": 3,
+      "144": 3,
+      "145": 3,
+      "146": 3,
+      "147": 3,
+      "148": 3,
       "149": 0,
-      "150": 1,
-      "151": 1,
-      "152": 1,
+      "150": 0,
+      "151": 0,
+      "152": 0,
       "153": 2,
       "154": 0,
       "155": 1,
       "156": 0,
-      "157": 5,
-      "158": 5,
-      "159": 5,
-      "160": 5,
-      "161": 5,
-      "162": 5,
-      "163": 11,
-      "164": 5,
-      "165": 11,
-      "166": 100,
-      "167": 5,
-      "168": 5,
-      "169": 5,
-      "170": 100,
-      "171": 95,
-      "172": 95,
-      "173": 11
+      "157": 3,
+      "158": 3,
+      "159": 3,
+      "160": 3,
+      "161": 3,
+      "162": 3,
+      "163": 3,
+      "164": 3,
+      "165": 3,
+      "166": 66,
+      "167": 3,
+      "168": 3,
+      "169": 3,
+      "170": 66,
+      "171": 63,
+      "172": 63,
+      "173": 3
     },
     "f": {
-      "0": 24,
-      "1": 1,
+      "0": 0,
+      "1": 0,
       "2": 34,
       "3": 2,
       "4": 17,
       "5": 1,
       "6": 51,
-      "7": 45,
-      "8": 75,
+      "7": 33,
+      "8": 51,
       "9": 0,
-      "10": 11,
-      "11": 5,
-      "12": 5,
+      "10": 3,
+      "11": 3,
+      "12": 3,
       "13": 0,
-      "14": 1,
-      "15": 1,
+      "14": 0,
+      "15": 0,
       "16": 2,
       "17": 0,
       "18": 1,
       "19": 0,
-      "20": 5,
-      "21": 5,
-      "22": 5,
-      "23": 5,
-      "24": 5,
-      "25": 100
+      "20": 3,
+      "21": 3,
+      "22": 3,
+      "23": 3,
+      "24": 3,
+      "25": 66
     },
     "b": {
       "0": [
-        2,
-        22
+        0,
+        0
       ],
       "1": [
         2,
@@ -12198,32 +12198,32 @@
         3
       ],
       "5": [
-        5,
-        40
+        3,
+        30
       ],
       "6": [
-        40,
-        5
+        30,
+        3
       ],
       "7": [
-        5,
-        70
+        3,
+        48
       ],
       "8": [
-        70,
-        5
+        48,
+        3
       ],
       "9": [
-        5,
-        5
+        3,
+        3
       ],
       "10": [
-        5,
-        95
+        3,
+        63
       ],
       "11": [
-        95,
-        5
+        63,
+        3
       ]
     },
     "inputSourceMap": {
@@ -12279,8 +12279,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/detail/detail.component.html",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/detail/detail.component.html",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/detail/detail.component.ts"
       ],
       "sourcesContent": [
         "<div class=\"m3\">\n  <mat-card *ngIf=\"session\">\n    <mat-card-title>\n      <div fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayout=\"row\" fxLayoutAlign=\"start center\">\n          <button mat-icon-button (click)=\"back()\">\n            <mat-icon>arrow_back</mat-icon>\n          </button>\n          <h1>{{session.name | titlecase}}</h1>\n        </div>\n        <div>\n          <button *ngIf=\"isAdmin\" mat-raised-button color=\"warn\" (click)=\"delete()\">\n            <mat-icon>delete</mat-icon>\n            <span class=\"ml1\">Delete</span>\n          </button>\n          <div *ngIf=\"!isAdmin\">\n            <button *ngIf=\"!isParticipate\" mat-raised-button color=\"primary\" (click)=\"participate()\">\n              <mat-icon>person_add</mat-icon>\n              <span class=\"ml1\">Participate</span>\n            </button>\n            <button *ngIf=\"isParticipate\" mat-raised-button color=\"warn\" (click)=\"unParticipate()\">\n              <mat-icon>person_remove</mat-icon>\n              <span class=\"ml1\">Do not participate</span>\n            </button>\n\n          </div>\n\n\n        </div>\n      </div>\n    </mat-card-title>\n    <mat-card-subtitle *ngIf=\"teacher\">\n      <div fxLayoutAlign=\"start center\" class=\"ml3\">\n        <mat-icon>\n          people\n        </mat-icon>\n        <span class=\"ml1\">{{ teacher.firstName }} {{ teacher.lastName | uppercase }}</span>\n      </div>\n    </mat-card-subtitle>\n    <div mat-card-image fxLayoutAlign=\"center center\">\n      <img class=\"picture\" src=\"assets/sessions.png\" alt=\"Yoga session\">\n    </div>\n    <mat-card-content>\n      <div class=\"my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>\n            group\n          </mat-icon>\n          <span class=\"ml1\">{{ session.users.length }} attendees</span>\n        </div>\n        <div fxLayoutAlign=\"start center\">\n          <mat-icon>\n            calendar_month\n          </mat-icon>\n          <span class=\"ml1\">{{ session.date | date: 'longDate'}}</span>\n        </div>\n      </div>\n      <div class=\"description\">\n        <p>Description:</p>\n        {{ session.description }}\n        <br>\n      </div>\n      <div class=\"date\" class=\"my2\" fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n        <div class=\"created\"><i>Create at: </i> {{ session.createdAt| date: 'longDate'}}</div>\n        <div class=\"updated\"><i>Last update: </i> {{ session.updatedAt| date: 'longDate'}}</div>\n      </div>\n    </mat-card-content>\n  </mat-card>\n</div>\n",
@@ -12288,10 +12288,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "0c4cec3ee28acb1b4a7129340b9e6068430f8b92"
+    "hash": "ce20a3049c8514f6797553705aefcaaa32ccc671"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/form/form.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/form/form.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/form/form.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/form/form.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -14309,194 +14309,194 @@
       }
     },
     "s": {
-      "0": 73,
-      "1": 1,
-      "2": 1,
-      "3": 1,
-      "4": 32,
-      "5": 1,
-      "6": 1,
-      "7": 1,
-      "8": 172,
-      "9": 4,
-      "10": 4,
-      "11": 4,
-      "12": 172,
-      "13": 168,
-      "14": 168,
-      "15": 168,
-      "16": 168,
-      "17": 100,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2,
-      "24": 2,
-      "25": 2,
-      "26": 2,
-      "27": 2,
-      "28": 2,
-      "29": 2,
-      "30": 2,
-      "31": 2,
-      "32": 2,
-      "33": 2,
-      "34": 2,
-      "35": 2,
-      "36": 2,
-      "37": 2,
-      "38": 2,
-      "39": 2,
-      "40": 2,
-      "41": 2,
-      "42": 2,
-      "43": 2,
-      "44": 2,
-      "45": 2,
-      "46": 2,
-      "47": 2,
-      "48": 2,
-      "49": 100,
-      "50": 98,
-      "51": 98,
-      "52": 98,
-      "53": 98,
-      "54": 98,
-      "55": 98,
-      "56": 98,
-      "57": 11,
-      "58": 2,
-      "59": 2,
-      "60": 2,
-      "61": 2,
-      "62": 2,
-      "63": 2,
-      "64": 2,
-      "65": 2,
-      "66": 2,
-      "67": 2,
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 0,
+      "28": 0,
+      "29": 0,
+      "30": 0,
+      "31": 0,
+      "32": 0,
+      "33": 0,
+      "34": 0,
+      "35": 0,
+      "36": 0,
+      "37": 0,
+      "38": 0,
+      "39": 0,
+      "40": 0,
+      "41": 0,
+      "42": 0,
+      "43": 0,
+      "44": 0,
+      "45": 0,
+      "46": 0,
+      "47": 0,
+      "48": 0,
+      "49": 0,
+      "50": 0,
+      "51": 0,
+      "52": 0,
+      "53": 0,
+      "54": 0,
+      "55": 0,
+      "56": 0,
+      "57": 3,
+      "58": 0,
+      "59": 0,
+      "60": 0,
+      "61": 0,
+      "62": 0,
+      "63": 0,
+      "64": 0,
+      "65": 0,
+      "66": 0,
+      "67": 0,
       "68": 0,
-      "69": 2,
-      "70": 2,
-      "71": 1,
-      "72": 1,
-      "73": 1,
-      "74": 1,
-      "75": 1,
-      "76": 2,
-      "77": 2,
-      "78": 1,
-      "79": 1,
-      "80": 1,
-      "81": 1,
-      "82": 2,
-      "83": 2,
-      "84": 2,
-      "85": 11,
-      "86": 2,
-      "87": 11,
-      "88": 105,
-      "89": 2,
-      "90": 2,
-      "91": 2,
-      "92": 2,
-      "93": 2,
-      "94": 2,
-      "95": 2,
-      "96": 2,
-      "97": 105,
-      "98": 103,
-      "99": 103,
-      "100": 103,
-      "101": 103,
-      "102": 103,
-      "103": 103,
-      "104": 11
+      "69": 0,
+      "70": 0,
+      "71": 0,
+      "72": 0,
+      "73": 0,
+      "74": 0,
+      "75": 0,
+      "76": 0,
+      "77": 0,
+      "78": 0,
+      "79": 0,
+      "80": 0,
+      "81": 0,
+      "82": 0,
+      "83": 0,
+      "84": 0,
+      "85": 3,
+      "86": 0,
+      "87": 3,
+      "88": 0,
+      "89": 0,
+      "90": 0,
+      "91": 0,
+      "92": 0,
+      "93": 0,
+      "94": 0,
+      "95": 0,
+      "96": 0,
+      "97": 0,
+      "98": 0,
+      "99": 0,
+      "100": 0,
+      "101": 0,
+      "102": 0,
+      "103": 0,
+      "104": 3
     },
     "f": {
-      "0": 73,
-      "1": 32,
-      "2": 172,
-      "3": 100,
-      "4": 2,
-      "5": 11,
-      "6": 2,
-      "7": 2,
-      "8": 1,
-      "9": 2,
-      "10": 1,
-      "11": 1,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 105
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 3,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0
     },
     "b": {
       "0": [
-        1,
-        72
+        0,
+        0
       ],
       "1": [
-        1,
-        31
+        0,
+        0
       ],
       "2": [
-        4,
-        168
+        0,
+        0
       ],
       "3": [
-        168,
-        4
+        0,
+        0
       ],
       "4": [
-        2,
-        98
+        0,
+        0
       ],
       "5": [
-        98,
-        2
+        0,
+        0
       ],
       "6": [
         0,
-        2
+        0
       ],
       "7": [
-        1,
-        1
+        0,
+        0
       ],
       "8": [
-        1,
-        1
+        0,
+        0
       ],
       "9": [
-        1,
-        1
+        0,
+        0
       ],
       "10": [
-        1,
-        1
+        0,
+        0
       ],
       "11": [
-        1,
-        1
+        0,
+        0
       ],
       "12": [
-        1,
-        1
+        0,
+        0
       ],
       "13": [
-        2,
-        2
+        0,
+        0
       ],
       "14": [
-        2,
-        103
+        0,
+        0
       ],
       "15": [
-        103,
-        2
+        0,
+        0
       ]
     },
     "inputSourceMap": {
@@ -14558,8 +14558,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/form/form.component.ts",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/form/form.component.html"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/form/form.component.ts",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/form/form.component.html"
       ],
       "sourcesContent": [
         "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport { ActivatedRoute, Router } from '@angular/router';\nimport { SessionService } from '../../../../services/session.service';\nimport { TeacherService } from '../../../../services/teacher.service';\nimport { Session } from '../../interfaces/session.interface';\nimport { SessionApiService } from '../../services/session-api.service';\n\n@Component({\n  selector: 'app-form',\n  templateUrl: './form.component.html',\n  styleUrls: ['./form.component.scss']\n})\nexport class FormComponent implements OnInit {\n\n  public onUpdate: boolean = false;\n  public sessionForm: FormGroup | undefined;\n  public teachers$ = this.teacherService.all();\n  private id: string | undefined;\n\n  constructor(\n    private route: ActivatedRoute,\n    private fb: FormBuilder,\n    private matSnackBar: MatSnackBar,\n    private sessionApiService: SessionApiService,\n    private sessionService: SessionService,\n    private teacherService: TeacherService,\n    private router: Router\n  ) {\n  }\n\n  public ngOnInit(): void {\n    if (!this.sessionService.sessionInformation!.admin) {\n      this.router.navigate(['/sessions']);\n    }\n    const url = this.router.url;\n    if (url.includes('update')) {\n      this.onUpdate = true;\n      this.id = this.route.snapshot.paramMap.get('id')!;\n      this.sessionApiService\n        .detail(this.id)\n        .subscribe((session: Session) => this.initForm(session));\n    } else {\n      this.initForm();\n    }\n  }\n\n  public submit(): void {\n    const session = this.sessionForm?.value as Session;\n\n    if (!this.onUpdate) {\n      this.sessionApiService\n        .create(session)\n        .subscribe((_: Session) => this.exitPage('Session created !'));\n    } else {\n      this.sessionApiService\n        .update(this.id!, session)\n        .subscribe((_: Session) => this.exitPage('Session updated !'));\n    }\n  }\n\n  private initForm(session?: Session): void {\n    this.sessionForm = this.fb.group({\n      name: [\n        session ? session.name : '',\n        [Validators.required]\n      ],\n      date: [\n        session ? new Date(session.date).toISOString().split('T')[0] : '',\n        [Validators.required]\n      ],\n      teacher_id: [\n        session ? session.teacher_id : '',\n        [Validators.required]\n      ],\n      description: [\n        session ? session.description : '',\n        [\n          Validators.required,\n          Validators.max(2000)\n        ]\n      ],\n    });\n  }\n\n  private exitPage(message: string): void {\n    this.matSnackBar.open(message, 'Close', { duration: 3000 });\n    this.router.navigate(['sessions']);\n  }\n}\n",
@@ -14567,10 +14567,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "cf4117f0028b08a371808f890bc2effa512b7671"
+    "hash": "2b039be23c824b964062f024194471655d364b5f"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/list/list.component.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/list/list.component.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/list/list.component.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/list/list.component.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -15906,131 +15906,131 @@
       }
     },
     "s": {
-      "0": 108,
-      "1": 12,
-      "2": 12,
-      "3": 12,
-      "4": 12,
-      "5": 12,
-      "6": 12,
-      "7": 11,
-      "8": 3,
-      "9": 9,
-      "10": 3,
-      "11": 3,
-      "12": 3,
-      "13": 3,
-      "14": 3,
-      "15": 3,
-      "16": 9,
-      "17": 6,
-      "18": 6,
-      "19": 11,
-      "20": 6,
-      "21": 18,
-      "22": 6,
-      "23": 6,
-      "24": 6,
-      "25": 6,
-      "26": 6,
-      "27": 6,
-      "28": 6,
-      "29": 6,
-      "30": 6,
-      "31": 6,
-      "32": 6,
-      "33": 6,
-      "34": 6,
-      "35": 6,
-      "36": 6,
-      "37": 6,
-      "38": 6,
-      "39": 6,
-      "40": 6,
-      "41": 6,
-      "42": 6,
-      "43": 18,
-      "44": 12,
-      "45": 12,
-      "46": 12,
-      "47": 12,
-      "48": 12,
-      "49": 12,
-      "50": 12,
-      "51": 12,
-      "52": 12,
-      "53": 12,
-      "54": 12,
-      "55": 12,
-      "56": 11,
-      "57": 15,
-      "58": 15,
-      "59": 15,
-      "60": 132,
-      "61": 11,
-      "62": 15,
-      "63": 11,
-      "64": 135,
-      "65": 15,
-      "66": 15,
-      "67": 15,
-      "68": 15,
-      "69": 15,
-      "70": 15,
-      "71": 15,
-      "72": 15,
-      "73": 15,
-      "74": 135,
-      "75": 120,
-      "76": 120,
-      "77": 120,
-      "78": 120,
-      "79": 11
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 3,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 3,
+      "20": 3,
+      "21": 9,
+      "22": 3,
+      "23": 3,
+      "24": 3,
+      "25": 3,
+      "26": 3,
+      "27": 3,
+      "28": 3,
+      "29": 3,
+      "30": 3,
+      "31": 3,
+      "32": 3,
+      "33": 3,
+      "34": 3,
+      "35": 3,
+      "36": 3,
+      "37": 3,
+      "38": 3,
+      "39": 3,
+      "40": 3,
+      "41": 3,
+      "42": 3,
+      "43": 9,
+      "44": 6,
+      "45": 6,
+      "46": 6,
+      "47": 6,
+      "48": 6,
+      "49": 6,
+      "50": 6,
+      "51": 6,
+      "52": 6,
+      "53": 6,
+      "54": 6,
+      "55": 6,
+      "56": 3,
+      "57": 3,
+      "58": 3,
+      "59": 3,
+      "60": 30,
+      "61": 3,
+      "62": 3,
+      "63": 3,
+      "64": 27,
+      "65": 3,
+      "66": 3,
+      "67": 3,
+      "68": 3,
+      "69": 3,
+      "70": 3,
+      "71": 3,
+      "72": 3,
+      "73": 3,
+      "74": 27,
+      "75": 24,
+      "76": 24,
+      "77": 24,
+      "78": 24,
+      "79": 3
     },
     "f": {
-      "0": 108,
-      "1": 3,
-      "2": 9,
-      "3": 6,
-      "4": 18,
-      "5": 11,
-      "6": 15,
-      "7": 132,
-      "8": 15,
-      "9": 135
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 3,
+      "4": 9,
+      "5": 3,
+      "6": 3,
+      "7": 30,
+      "8": 3,
+      "9": 27
     },
     "b": {
       "0": [
-        12,
-        96
+        0,
+        0
       ],
       "1": [
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0
+      ],
+      "3": [
         3,
         6
       ],
-      "2": [
+      "4": [
         6,
         3
       ],
-      "3": [
-        6,
-        12
-      ],
-      "4": [
-        12,
-        6
-      ],
       "5": [
-        15,
-        15
+        3,
+        3
       ],
       "6": [
-        15,
-        120
+        3,
+        24
       ],
       "7": [
-        120,
-        15
+        24,
+        3
       ]
     },
     "inputSourceMap": {
@@ -16053,8 +16053,8 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/list/list.component.html",
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/components/list/list.component.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/list/list.component.html",
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/components/list/list.component.ts"
       ],
       "sourcesContent": [
         "<div class=\"list\">\n  <mat-card>\n    <mat-card-header fxLayout=\"row\" fxLayoutAlign=\"space-between center\">\n      <mat-card-title class=\"m0\">Rentals available</mat-card-title>\n      <button *ngIf=\"user!.admin\" mat-raised-button color=\"primary\" routerLink=\"create\">\n        <mat-icon>add</mat-icon>\n        <span class=\"ml1\">Create</span>\n      </button>\n    </mat-card-header>\n    <div class=\"items mt2\" fxLayout=\"row wrap\" fxLayout.lt-md=\"column\">\n      <mat-card class=\"item\" *ngFor=\"let session of (sessions$ | async)\" fxFlex>\n        <mat-card-header>\n          <mat-card-title>{{ session.name }}</mat-card-title>\n          <mat-card-subtitle>\n            Session on {{ session.date | date: 'longDate'}}\n          </mat-card-subtitle>\n        </mat-card-header>\n        <div mat-card-image fxLayoutAlign=\"center center\">\n          <img class=\"picture\" src=\"assets/sessions.png\" alt=\"Yoga session\">\n        </div>\n        <mat-card-content>\n          <p>\n            {{ session.description }}\n          </p>\n        </mat-card-content>\n        <mat-card-actions>\n          <button mat-raised-button color=\"primary\" [routerLink]=\"['detail',session.id]\">\n            <mat-icon>search</mat-icon>\n            <span class=\"ml1\">Detail</span>\n          </button>\n          <button *ngIf=\"user!.admin\" mat-raised-button color=\"primary\"\n                  [routerLink]=\"['update',session.id]\">\n            <mat-icon>edit</mat-icon>\n            <span class=\"ml1\">Edit</span>\n          </button>\n        </mat-card-actions>\n      </mat-card>\n    </div>\n  </mat-card>\n</div>\n",
@@ -16062,10 +16062,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "64c293f09bfca06049b872cf636243f0aa0aaf59"
+    "hash": "c946e0be35aaec82b3c42c2581131d2d4196103b"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -16227,22 +16227,22 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
-      "4": 11,
-      "5": 11,
-      "6": 11
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3
     },
     "f": {
-      "0": 11,
-      "1": 11
+      "0": 3,
+      "1": 3
     },
     "b": {
       "0": [
-        11,
-        11
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -16262,17 +16262,17 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions-routing.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { DetailComponent } from './components/detail/detail.component';\nimport { FormComponent } from './components/form/form.component';\nimport { ListComponent } from './components/list/list.component';\n\nconst routes: Routes = [\n  { path: '', title: 'Sessions', component: ListComponent },\n  { path: 'detail/:id', title: 'Sessions - detail', component: DetailComponent },\n  { path: 'create', title: 'Sessions - create', component: FormComponent },\n  { path: 'update/:id', title: 'Sessions - update', component: FormComponent }\n];\n\n@NgModule({\n  imports: [RouterModule.forChild(routes)],\n  exports: [RouterModule]\n})\nexport class SessionsRoutingModule {\n}\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ab8f0b06c370a0bf6934ffcc76a073ff0d9a1c62"
+    "hash": "758ad44bcf2e1c6f578b0990703bf53a8f218eb7"
   },
-  "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions.module.ts": {
-    "path": "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions.module.ts",
+  "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions.module.ts": {
+    "path": "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions.module.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -16444,23 +16444,23 @@
       }
     },
     "s": {
-      "0": 11,
-      "1": 11,
-      "2": 11,
-      "3": 11,
-      "4": 11,
-      "5": 11,
-      "6": 11,
-      "7": 11
+      "0": 3,
+      "1": 3,
+      "2": 3,
+      "3": 3,
+      "4": 3,
+      "5": 3,
+      "6": 3,
+      "7": 3
     },
     "f": {
-      "0": 11,
-      "1": 11
+      "0": 3,
+      "1": 3
     },
     "b": {
       "0": [
-        11,
-        11
+        3,
+        3
       ]
     },
     "inputSourceMap": {
@@ -16485,13 +16485,13 @@
       ],
       "sourceRoot": "",
       "sources": [
-        "/Users/mdonskoff/Desktop/yoga-app/front/src/app/features/sessions/sessions.module.ts"
+        "/Users/mdonskoff/Desktop/OpenClassrooms/Projets/Projet 5/yoga-app/front/src/app/features/sessions/sessions.module.ts"
       ],
       "sourcesContent": [
         "import { NgModule } from '@angular/core';\nimport { CommonModule, registerLocaleData } from '@angular/common';\nimport { FlexLayoutModule } from '@angular/flex-layout';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatCardModule } from '@angular/material/card';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\nimport { ListComponent } from './components/list/list.component';\nimport { FormComponent } from './components/form/form.component';\nimport { DetailComponent } from './components/detail/detail.component';\nimport { SessionsRoutingModule } from './sessions-routing.module';\nimport localeFr from '@angular/common/locales/fr';\nregisterLocaleData(localeFr);\n\nconst materialModules = [\n  MatButtonModule,\n  MatCardModule,\n  MatFormFieldModule,\n  MatIconModule,\n  MatInputModule,\n  MatSnackBarModule,\n  MatSelectModule\n];\n\n@NgModule({\n  declarations: [\n    ListComponent,\n    FormComponent,\n    DetailComponent\n  ],\n  imports: [\n    CommonModule,\n    FlexLayoutModule,\n    ReactiveFormsModule,\n    SessionsRoutingModule,\n    ...materialModules\n  ]\n})\nexport class SessionsModule { }\n"
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a572254d4692005b377ba5e541909b1f32942df9"
+    "hash": "b030c6c98b478bfb52ea472e711cd888b93784b1"
   }
 }
