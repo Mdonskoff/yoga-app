@@ -15,7 +15,7 @@ describe('AuthService', () => {
             post : jest.fn(),
         }
         service = new AuthService(httpClientSpy)
-        
+
     })
     afterEach(() => {
         jest.restoreAllMocks();
@@ -24,9 +24,9 @@ describe('AuthService', () => {
     it('should register user', () => {
         const url = 'api/auth/register';
         register =  {
-            email: "test@example.com",
-            firstName: "test",
-            lastName: "test lastname",
+            email: "test@test.com",
+            firstName: "Bruce",
+            lastName: "Wayne",
             password: "test1234",
         }
         jest.spyOn(httpClientSpy, 'post').mockReturnValue(of());
@@ -39,7 +39,7 @@ describe('AuthService', () => {
     it('should login user', () => {
         const url = 'api/auth/login';
         login =  {
-            email: "test@example.com",
+            email: "test@test.com",
             password: "test1234",
         }
         jest.spyOn(httpClientSpy, 'post').mockReturnValue(of());

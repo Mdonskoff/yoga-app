@@ -1,4 +1,3 @@
-import {screen} from '@testing-library/angular'
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +24,7 @@ describe('RegisterComponent integration test', () => {
       imports: [
         BrowserAnimationsModule,
         HttpClientModule,
-        ReactiveFormsModule,  
+        ReactiveFormsModule,
         MatCardModule,
         MatFormFieldModule,
         MatIconModule,
@@ -45,9 +44,9 @@ describe('RegisterComponent integration test', () => {
   })
 
   const loadSessionFormValue = () => {
-    component.form?.get('email')?.setValue('test@test.fr');
-    component.form?.get('firstName')?.setValue("Valery");
-    component.form?.get('lastName')?.setValue('Grodin');
+    component.form?.get('email')?.setValue('test@test.com');
+    component.form?.get('firstName')?.setValue("Donald");
+    component.form?.get('lastName')?.setValue('Duck');
     component.form?.get('password')?.setValue("password");
   }
 
@@ -66,7 +65,7 @@ describe('RegisterComponent integration test', () => {
 
       button.nativeElement.click();
       fixture.detectChanges();
-      
+
       expect(authServiceSpy).toHaveBeenCalled();
   })
 
@@ -81,7 +80,7 @@ describe('RegisterComponent integration test', () => {
 
     button.nativeElement.click();
     fixture.detectChanges();
-    
+
     expect(authServiceSpy).not.toHaveBeenCalled();
   })
 

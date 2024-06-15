@@ -71,7 +71,7 @@ public class SessionControllerTest {
         session.setDate(new Date());
         session.setDescription("Description session");
 
-        Session savedSession = sessionRepository.save(session);
+        sessionRepository.save(session);
 
         SessionDto sessionDto = new SessionDto();
         sessionDto.setName("Yoga");
@@ -81,23 +81,12 @@ public class SessionControllerTest {
 
         SessionDto expectedSessionDto = sessionMapper.toDto(session);
 
-        // Effectuez une demande GET pour obtenir la session par son ID
         mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", expectedSessionDto.getId()))
-                // Vérifiez que la réponse est un code de statut OK
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                // Vérifiez que le contenu de la réponse est de type JSON
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
-                // Vérifiez que le nom de la session dans le JSON de la réponse correspond au nom de la session enregistrée
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Yoga"))
-                // Vérifiez que l'ID de la session dans le JSON de la réponse correspond à l'ID de la session enregistrée
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedSessionDto.getId()));
 
-        /*
-        ResponseEntity<?> responseEntity = sessionController.findById(String.valueOf(idSession));
-        assertEquals(sessionDto.getName(), ((SessionDto)responseEntity.getBody()).getName());
-        assertEquals(sessionDto.getDescription(), ((SessionDto)responseEntity.getBody()).getDescription());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        */
     }
 
     @Test
@@ -106,14 +95,10 @@ public class SessionControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", id))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
-        /*
-        ResponseEntity<?> responseEntity = sessionController.findById("1");
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-         */
 
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should return a bad request status")
     void giveIdSession_thenFindSessionById_shouldBadRequestStatus() throws Exception {
 
@@ -122,27 +107,19 @@ public class SessionControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/session/{id}", "a"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        /*
-        ResponseEntity<?> responseEntity = sessionController.findById("a");
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
-         */
-
     }
 
     @Test
     @DisplayName("Should return all sessions")
     void giveIdSession_thenFindSessionById_shouldReturnAllSessions() throws Exception {
 
-        //Créer une session
         Session session = new Session();
         session.setName("Yoga");
         session.setDate(new Date());
         session.setDescription("Description session");
 
-        //Sauvegardée dans la BDD pour le test
         sessionRepository.save(session);
 
-        //Créer une 2e session
         Session session2 = new Session();
         session2.setName("Zen");
         session2.setDate(new Date());
@@ -150,8 +127,6 @@ public class SessionControllerTest {
 
         sessionRepository.save(session2);
 
-        //On crée une liste de sessionDto
-        //List<SessionDto> sessions = List.of(this.sessionMapper.toDto(session));
         List<Session> sessions = List.of(new Session().setName("Yoga"), new Session().setName("Zen"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/session"))
@@ -159,14 +134,6 @@ public class SessionControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Yoga"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].name").value("Zen"));
-
-        /*
-        //Renvoie une liste de sessionDto
-        ResponseEntity<?> responseEntity = sessionController.findAll();
-        //On compare le 1er nom de la liste des sessions du controller et ce qu'on a créé
-        assertEquals(sessions.get(0).getName(), ((List<SessionDto>)responseEntity.getBody()).get(0).getName());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-         */
 
     }
 
@@ -190,11 +157,6 @@ public class SessionControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(session.getName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(session.getDescription()));
-        /*
-       ResponseEntity<?> responseEntity = sessionController.create(sessionDto);
-       assertEquals(sessionDto.getName(), ((SessionDto)responseEntity.getBody()).getName());
-       assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-         */
     }
 
     @Test
@@ -222,15 +184,9 @@ public class SessionControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(sessionDto.getName()));
 
-        /*
-        ResponseEntity<?> responseEntity = sessionController.update(newSession.getId().toString(), sessionDto);
-        assertEquals("Yoga", ((SessionDto) responseEntity.getBody()).getName());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-         */
-
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should update a session and return a bad request status")
     void giveIdSession_thenUpdateSession_shouldBadRequestStatus() throws Exception {
 
@@ -246,9 +202,6 @@ public class SessionControllerTest {
                         .content(objectMapper.writeValueAsString(sessionDto)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        /*ResponseEntity<?> responseEntity = sessionController.update("a", sessionDto);
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());*/
-
     }
 
     @Test
@@ -260,22 +213,14 @@ public class SessionControllerTest {
         session.setDate(new Date());
         session.setDescription("Description session");
 
-        // Enregistrez la session dans la base de données
         Session savedSession = sessionRepository.save(session);
 
-        // Obtenez l'ID de la session enregistrée
         Long sessionId = savedSession.getId();
 
-        // Effectuez une demande DELETE vers la route /api/session/{id} avec l'ID de la session
         mockMvc.perform(delete("/api/session/{id}", sessionId))
-                // Vérifiez que la réponse est un code de statut OK
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        // Vérifiez que la session a été supprimée de la base de données
         assertFalse(sessionRepository.existsById(sessionId));
-
-       /* ResponseEntity<?> responseEntity = sessionController.save(newSession.getId().toString());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode()); */
 
     }
 
@@ -286,138 +231,89 @@ public class SessionControllerTest {
         mockMvc.perform(delete("/api/session/{id}", id))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
 
-        /* ResponseEntity<?> responseEntity = sessionController.save("1");
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode()); */
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should delete a session and return a bad request status")
     void giveIdSession_thenFindSessionById_shouldReturnBadRequestStatus() throws Exception {
 
         mockMvc.perform(delete("/api/session/{id}", "a"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        /* ResponseEntity<?> responseEntity = sessionController.save("a");
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode()); */
     }
 
     @Test
     @DisplayName("Should participate to a session")
     void giveIdSession_thenUserParticipateToASession_shouldParticipate() throws Exception {
 
-        // Créez une session et enregistrez-la dans la base de données
         Session session = new Session();
         session.setName("Zen");
         session.setDate(new Date());
         session.setDescription("Description session");
         Session savedSession = sessionRepository.save(session);
 
-        // Créez un utilisateur et enregistrez-le dans la base de données
         User user = new User("test@example.com", "Doe", "John", "1234", false);
         User savedUser = userRepository.save(user);
 
-        // Obtenez l'ID de la session et de l'utilisateur enregistrés
         Long sessionId = savedSession.getId();
         Long userId = savedUser.getId();
 
-        // Effectuez une demande POST vers la route /api/session/{id}/participate/{userId} avec les IDs de session et d'utilisateur
         mockMvc.perform(MockMvcRequestBuilders.post("/api/session/{sessionId}/participate/{userId}", sessionId, userId))
-                // Vérifiez que la réponse est un code de statut OK
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        // Vérifiez que l'utilisateur participe maintenant à la session
         Session updatedSession = sessionRepository.findById(sessionId).orElse(null);
         assertNotNull(updatedSession);
         assertTrue(updatedSession.getUsers().contains(savedUser));
 
-       /* ResponseEntity<?> responseEntity = sessionController.participate(newSession.getId().toString(), newUser.getId().toString());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode()); */
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should participate to a session but return a bad request status")
     void giveIdSession_thenUserParticipateToASession_shouldReturnBadRequestStatus() throws Exception {
 
-        // Effectuez une demande POST vers la route /api/session/{id}/participate/{userId} avec des IDs invalides
         mockMvc.perform(MockMvcRequestBuilders.post("/api/session/{id}/participate/{userId}", "a", "b"))
-                // Vérifiez que la réponse est un code de statut BadRequest
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-
-        /* ResponseEntity<?> responseEntity = sessionController.participate("a", "b");
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode()); */
 
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should no longer participate to a session")
     void giveIdSession_thenUserNoLongerParticipateToASession_shouldNoLongerParticipate() throws Exception {
 
-        // Créez une session et enregistrez-la dans la base de données
         Session session = new Session();
         session.setName("Zen");
         session.setDate(new Date());
         session.setDescription("Description session");
         Session savedSession = sessionRepository.save(session);
 
-        // Créez un utilisateur et enregistrez-le dans la base de données
         User user = new User("test@example.com", "Doe", "John", "1234", false);
         User savedUser = userRepository.save(user);
 
-        //Créer une liste de users, y ajouter l'user créé à la session
         List<User> usersList = new ArrayList<>();
         usersList.add(savedUser);
         savedSession.setUsers(usersList);
         sessionRepository.save(savedSession);
 
-        // Obtenez l'ID de la session et de l'utilisateur enregistrés
         Long sessionId = savedSession.getId();
         Long userId = savedUser.getId();
 
-        // Effectuez une demande DELETE pour retirer l'utilisateur de la session
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/session/{sessionId}/participate/{userId}", sessionId, userId))
                 // Vérifiez que la réponse est un code de statut OK
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        // Vérifiez que l'utilisateur ne participe plus à la session
         Session updatedSession = sessionRepository.findById(sessionId).orElse(null);
         assertNotNull(updatedSession);
         assertFalse(updatedSession.getUsers().contains(savedUser));
 
-        /*
-        // Ajoutez l'utilisateur à la session
-        savedSession.getUsers().add(savedUser);
-        sessionRepository.save(savedSession);
-
-         // Obtenez l'ID de la session et de l'utilisateur
-        Long sessionId = savedSession.getId();
-        Long userId = savedUser.getId();
-
-        // Effectuez une demande POST vers la route /api/session/{id}/participate/{userId} pour retirer l'utilisateur de la session
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/session/{sessionId}/participate/{userId}", sessionId, userId))
-                // Vérifiez que la réponse est un code de statut OK
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
-        // Vérifiez que l'utilisateur ne participe plus à la session
-        Session updatedSession = sessionRepository.findById(Long.valueOf(id)).orElse(null);
-        assertNotNull(updatedSession);
-        assertFalse(updatedSession.getUsers().contains(savedUser));
-
-         */
-
-        /* ResponseEntity<?> responseEntity = sessionController.noLongerParticipate(newSession.getId().toString(), newUser.getId().toString());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode()); */
-
     }
 
-    @Test //À VÉRIFIER
+    @Test
     @DisplayName("Should no longer participate to a session and return a bad request status")
     void giveIdSession_thenUserNoLongerParticipateToASession_shouldReturnBadRequestStatus() throws Exception {
 
         mockMvc.perform(delete("/api/session/{id}/participate/{userId}", "a", "b"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-       /* ResponseEntity<?> responseEntity = sessionController.noLongerParticipate("a", "b");
-        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode()); */
     }
 
     @AfterEach

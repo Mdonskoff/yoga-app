@@ -41,17 +41,14 @@ public class SessionMapperTest {
 
     @Test
     public void testToEntityWithValidDtoList() {
-        // Créer une liste de DTO
         List<SessionDto> dtoList = new ArrayList<>();
         SessionDto dto1 = new SessionDto();
         SessionDto dto2 = new SessionDto();
         dtoList.add(dto1);
         dtoList.add(dto2);
 
-        // Appeler la méthode à tester
         List<Session> result = sessionMapper.toEntity(dtoList);
 
-        // Vérifier si la liste résultante contient les entités converties
         assertNotNull(result);
         assertEquals(dtoList.size(), result.size());
     }

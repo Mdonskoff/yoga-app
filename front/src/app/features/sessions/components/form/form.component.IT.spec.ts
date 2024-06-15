@@ -36,15 +36,15 @@ describe('FormComponent integration test', () => {
 
   const mockTeacher : Teacher[] = [{
     id: 1,
-    lastName: "Maeva",
-    firstName: "Goudon",
+    lastName: "Diana",
+    firstName: "Prince",
     createdAt: new Date(),
     updatedAt: new Date()
   }]
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      
+
       imports: [
         RouterTestingModule,
         HttpClientModule,
@@ -52,7 +52,7 @@ describe('FormComponent integration test', () => {
         MatIconModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         MatSnackBarModule,
         MatSelectModule,
         BrowserAnimationsModule,
@@ -61,7 +61,7 @@ describe('FormComponent integration test', () => {
       ],
       providers: [
         { provide: SessionService, useValue: mockSessionService },
-        
+
       ],
       declarations: [FormComponent]
     })
@@ -110,7 +110,7 @@ describe('FormComponent integration test', () => {
     expect(button.nativeElement.disabled).toBeFalsy();
 
     button.nativeElement.click();
-    
+
     expect(submitSpy).toHaveBeenCalled();
     expect(sessionApiService.create).toHaveBeenCalled();
   });
@@ -126,7 +126,7 @@ describe('FormComponent integration test', () => {
     let submitSpy = jest.spyOn(component, 'submit');
     component.onUpdate = true;
     jest.spyOn(sessionApiService, 'update');
-    
+
 
     loadSessionFormValue(date);
     fixture.detectChanges();
@@ -137,7 +137,7 @@ describe('FormComponent integration test', () => {
     expect(button.nativeElement.disabled).toBeFalsy();
 
     button.nativeElement.click();
-    
+
     expect(submitSpy).toHaveBeenCalled();
     expect(sessionApiService.update).toHaveBeenCalled();
   });

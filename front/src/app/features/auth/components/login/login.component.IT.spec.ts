@@ -54,19 +54,19 @@ describe('LoginComponent integration test', () => {
     expect(emailInput).toBeTruthy();
     expect(passwordInput).toBeTruthy();
 
-    component.form.get('email')?.setValue('test@example.com');
-    component.form.get('password')?.setValue('password123');
+    component.form.get('email')?.setValue('test@test.com');
+    component.form.get('password')?.setValue('password1234');
 
-    expect(emailInput.value).toBe('test@example.com');
-    expect(passwordInput.value).toBe('password123');
+    expect(emailInput.value).toBe('test@test.com');
+    expect(passwordInput.value).toBe('password1234');
   });
 
   it('should login',  async() => {
     const button = fixture.debugElement.query(By.css('button[type="submit"]'))
     const submitSpy = jest.spyOn(component, 'submit');
 
-    component.form.get('email')?.setValue('test@example.com');
-    component.form.get('password')?.setValue('password123');
+    component.form.get('email')?.setValue('test@test.com');
+    component.form.get('password')?.setValue('password1234');
     fixture.detectChanges();
 
     expect(button.nativeElement.textContent).toContain("Submit");
@@ -74,7 +74,7 @@ describe('LoginComponent integration test', () => {
 
     expect(submitSpy).toHaveBeenCalled();
     expect(component.onError).toBeFalsy();
-      
+
   });
 
   it('should not login', async() => {
@@ -84,14 +84,14 @@ describe('LoginComponent integration test', () => {
     const submitSpy = jest.spyOn(component, 'submit');
 
 
-    component.form.get("email")?.setValue("test@example.com");
+    component.form.get("email")?.setValue("test@test.com");
     component.form.get("password")?.setValue("te");
     fixture.detectChanges();
-    
-    expect(inputEmail.nativeElement.value).toBe("test@example.com");
+
+    expect(inputEmail.nativeElement.value).toBe("test@test.com");
     expect(inputPassword.nativeElement.value).toBe("te");
     expect(button.nativeElement.disabled).toBeFalsy();
-    
+
     button.nativeElement.click();
     let mockRequest = httpTestingController.expectOne('api/auth/login');
     mockRequest.flush({error : 'Unauthorized'}, {status : 401, statusText: 'Unauthorized'});
