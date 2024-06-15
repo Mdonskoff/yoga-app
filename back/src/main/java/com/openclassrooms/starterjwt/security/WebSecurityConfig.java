@@ -58,9 +58,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+      .antMatchers("/h2/**").permitAll() //Authoriser H2 pour les tests
       .antMatchers("/api/**").authenticated()
       .anyRequest().authenticated();
+    // Désactiver la protection CSRF pour la console H2
+    http.csrf().ignoringAntMatchers("/h2/**");
+    http.headers().frameOptions().disable();
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   }
+
 }
